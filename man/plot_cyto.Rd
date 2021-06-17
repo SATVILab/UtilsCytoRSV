@@ -9,7 +9,7 @@ plot_cyto(
   marker,
   lab = NULL,
   expand_limits = NULL,
-  axis_range_equal = NULL,
+  axis_range_equal = FALSE,
   font_size = 14
 )
 }
@@ -24,7 +24,7 @@ element is plotted on the x-axis.}
 the axis titles for marker are selected using it.}
 
 \item{axis_range_equal}{logical. If \code{TRUE}, then the ranges on the x- and y-axes
-must be equal. Effectively applied after expand_grid is applied.}
+must be equal. Effectively applied after expand_grid is applied. Default is \code{FALSE}.}
 
 \item{font_size}{integer. Font size to be passed on to
 \code{cowplot::theme_cowplot(font_size = <font_size>)}.}
@@ -49,5 +49,22 @@ Uses the following defaults:
    \code{cowplot::background_grid(major = 'xy')}.
    \item If a hex plot, then fill colour is defined by
    \code{scale_fill_viridis_c} with params \code{trans = 'log10'}.
+   \item axis units are equal
 }
+}
+\examples{
+
+data('GvHD', package = 'flowCore')
+ex_tbl <- flowCore::exprs(GvHD[[1]])
+marker <- c("FL2-H", "FL3-H")
+plot_cyto(
+ data = ex_tbl,
+ marker = marker
+)
+lab_vec <- cytoutils::chnl_lab(data = GvHD)
+plot_cyto(
+  data = ex_tbl,
+  marker = marker,
+  lab = lab_vec
+)
 }
