@@ -2,19 +2,10 @@ test_that("plot_cyto works", {
 
   # prep data
   data('GvHD', package = 'flowCore')
-  fr <- GvHD[[1]]
-  adf <- flowCore::parameters(fr)@data
-  lab_vec <- setNames(adf$desc, adf$name)
-  for(i in seq_along(lab_vec)){
-    if(is.na(lab_vec[i])){
-      lab_vec[i] <- names(lab_vec)[i]
-    }
-  }
   ex_tbl <- flowCore::exprs(GvHD[[1]]) %>%
     tibble::as_tibble()
-  try(detach('package:flowCore', unload = TRUE),
-      silent = TRUE)
-  data <- ex_tbl
+  lab_vec <- chnl_lab(data = GvHD)
+
   marker <- c("FL2-H", "FL3-H")
 
   # tests
@@ -57,14 +48,14 @@ test_that("plot_cyto works", {
     26
   )
 
-  # expand_limits
+  # limits_expand
   # -----------------
 
   # one element of length 1, no name
   p <- plot_cyto(
     data = ex_tbl,
     marker = marker,
-    expand_limits = list(-1e4)
+    limits_expand = list(-1e4)
   )
   expect_identical(
     length(p$layers),
@@ -82,14 +73,14 @@ test_that("plot_cyto works", {
   expect_error(plot_cyto(
     data = ex_tbl,
     marker = marker,
-    expand_limits = list(1e4, -5e2)
+    limits_expand = list(1e4, -5e2)
   ))
 
   # one element, no name
   p <- plot_cyto(
     data = ex_tbl,
     marker = marker,
-    expand_limits = list(c(1e4, -5e2))
+    limits_expand = list(c(1e4, -5e2))
   )
   expect_identical(
     p$layers[[2]]$data,
@@ -103,7 +94,7 @@ test_that("plot_cyto works", {
   p <- plot_cyto(
     data = ex_tbl,
     marker = marker,
-    expand_limits = list(x = c(1e4, -5e2))
+    limits_expand = list(x = c(1e4, -5e2))
   )
   expect_identical(
     p$layers[[2]]$data,
@@ -114,7 +105,7 @@ test_that("plot_cyto works", {
   p <- plot_cyto(
     data = ex_tbl,
     marker = marker,
-    expand_limits = list(y = c(1e4, -5e2))
+    limits_expand = list(y = c(1e4, -5e2))
   )
   expect_identical(
     p$layers[[2]]$data,
@@ -127,7 +118,7 @@ test_that("plot_cyto works", {
   p <- plot_cyto(
     data = ex_tbl,
     marker = marker,
-    expand_limits = list(y = c(1e4, -5e2),
+    limits_expand = list(y = c(1e4, -5e2),
                          x = c(-1e4, 2e4))
   )
   expect_identical(
@@ -145,7 +136,7 @@ test_that("plot_cyto works", {
   p <- plot_cyto(
     data = ex_tbl,
     marker = marker,
-    axis_range_equal = TRUE
+    limits_equal = TRUE
   )
 
   expect_identical(
@@ -153,20 +144,20 @@ test_that("plot_cyto works", {
     p$layers[[2]]$data[,2]
   )
 
-  # with expand_limits
+  # with limits_expand
   # just axis range equal
   p <- plot_cyto(
     data = ex_tbl,
     marker = marker,
-    axis_range_equal = TRUE,
-    expand_limits = list(y = c(1000, 200),
+    limits_equal = TRUE,
+    limits_expand = list(y = c(1000, 200),
                          x = c(-1e4, 500))
   )
 
   expect_identical(
     p$layers[[2]]$data[1,] %>%
       as.numeric(),
-    c(1, -1e4)
+    c(-1e4, -1e4)
   )
   expect_identical(
     p$layers[[2]]$data[2,] %>%
@@ -179,8 +170,8 @@ test_that("plot_cyto works", {
   p <- plot_cyto(
     data = ex_tbl,
     marker = marker,
-    axis_range_equal = TRUE,
-    expand_limits = list(y = c(1e4, 200))
+    limits_equal = TRUE,
+    limits_expand = list(y = c(1e4, 200))
   )
 
   expect_identical(
@@ -199,8 +190,8 @@ test_that("plot_cyto works", {
   p <- plot_cyto(
     data = ex_tbl,
     marker = marker,
-    axis_range_equal = TRUE,
-    expand_limits = list(x = c(1e4, 200))
+    limits_equal = TRUE,
+    limits_expand = list(x = c(1e4, 200))
   )
 
   expect_identical(
@@ -216,3 +207,13 @@ test_that("plot_cyto works", {
   )
 })
 
+test_that("plot_cyto_grid works", {
+  # prep data
+  data('GvHD', package = 'flowCore')
+  ex_tbl <- flowCore::exprs(GvHD[[1]]) %>%
+    tibble::as_tibble()
+  lab_vec <- chnl_lab(data = GvHD)
+
+  marker <- c("FL2-H", "FL3-H")
+
+})

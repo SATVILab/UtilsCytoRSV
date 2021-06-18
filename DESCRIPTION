@@ -17,5 +17,6 @@ Imports:
     flowCore,
     magrittr,
     purrr,
-    ggplot2
+    ggplot2,
+    plotutils
 RoxygenNote: 7.1.1
