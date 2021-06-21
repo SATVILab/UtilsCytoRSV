@@ -1,0 +1,74 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# cytoutils
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of `cytoutils` is to facilitate common data processing and visualisation tasks regarding cytometry data (with CyTOF and flow in mind).
+
+## Installation
+
+You can install `cytoutils` from [GitHub](https://github.com/) with:
+
+```{r github, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("SATVILab/cytoutils")
+```
+
+## Examples
+
+It provides a 2D hex plot with useful defaults. 
+```{r setup, fig.height = 2}
+library(cytoutils)
+data('GvHD', package = 'flowCore')
+ex_tbl <- flowCore::exprs(GvHD[[1]]) %>%
+  tibble::as_tibble()
+marker <- c("FL2-H", "FL3-H")
+plot_cyto(
+  data = ex_tbl, 
+  marker = marker
+)
+```
+
+The ranges can be made equal between the x- and y-axes.
+```{r plot_cyto-limits_equal}
+plot_cyto(
+  data = ex_tbl, 
+  marker = marker, 
+  limits_equal = TRUE
+)
+```
+
+Each axis can be forced to include particular values (especially useful if viewing gated data, which may have only positive-expressing cells and you then want to show that there are no negative-expressing cells).
+```{r plot_cyto-limits_expand}
+plot_cyto(
+  data = ex_tbl, 
+  marker = marker, 
+  limits_expand = list(y = -5e3)
+)
+```
+
+You can get a vector to label channels as markers using `chnl_lab`, and then supply this to `plot_cyto` to have better axis labels. Note that the inverse function, `marker_lab`, is also available to convert from markers to channels. 
+```{r plot_cyto-lab}
+chnl_lab <- chnl_lab(GvHD)
+plot_cyto(
+  data = ex_tbl, 
+  marker = marker, 
+  lab = chnl_lab,
+  limits_equal = TRUE
+)
+```

@@ -206,14 +206,3 @@ test_that("plot_cyto works", {
     c(1e4, 9222)
   )
 })
-
-test_that("plot_cyto_grid works", {
-  # prep data
-  data('GvHD', package = 'flowCore')
-  ex_tbl <- flowCore::exprs(GvHD[[1]]) %>%
-    tibble::as_tibble()
-  lab_vec <- chnl_lab(data = GvHD)
-
-  marker <- c("FL2-H", "FL3-H")
-
-})

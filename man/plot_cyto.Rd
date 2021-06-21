@@ -8,8 +8,8 @@ plot_cyto(
   data,
   marker,
   lab = NULL,
-  expand_limits = NULL,
-  axis_limits_equal = FALSE,
+  limits_expand = NULL,
+  limits_equal = FALSE,
   font_size = 14
 )
 }
@@ -23,15 +23,15 @@ element is plotted on the x-axis.}
 \item{lab}{named character vector. If not \code{NULL}, then
 the axis titles for marker are selected using it.}
 
-\item{expand_limits}{list. If not \code{NULL},
-then it is (effectively) passed onto \code{ggplot2::expand_limits} to
+\item{limits_expand}{list. If not \code{NULL},
+then it is (effectively) passed onto \code{ggplot2::limits_expand} to
 ensure that certain values are included in the plot (such as, for example, 0
 if that is the minimum value possible but it may not be plotted). If not named, then
 must consist of one numeric vector that will then force all values in the numeric value
 to be included in the plot. If named, then must have names \code{x} and/or \code{y},
 with the elements again being numeric vectors that must be included in plot.}
 
-\item{axis_limits_equal}{logical. If \code{TRUE}, then the ranges on the x- and y-axes
+\item{limits_equal}{logical. If \code{TRUE}, then the ranges on the x- and y-axes
 must be equal. Effectively applied after expand_grid is applied. Default is \code{FALSE}.}
 
 \item{font_size}{integer. Font size to be passed on to

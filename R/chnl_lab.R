@@ -11,6 +11,8 @@
 #'
 #' @return A named character vector.
 #'
+#' @export
+#'
 #' @examples
 #' data('GvHD', package = 'flowCore')
 #' chnl_lab(GvHD)
@@ -37,6 +39,7 @@ chnl_lab <- function(data){
 }
 
 #' @rdname chnl_lab
+#' @export
 marker_lab <- function(data){
   chnl_lab_vec <- chnl_lab(data)
   setNames(names(chnl_lab_vec), chnl_lab_vec)

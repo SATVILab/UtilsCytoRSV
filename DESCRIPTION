@@ -18,5 +18,6 @@ Imports:
     magrittr,
     purrr,
     ggplot2,
-    plotutils
+    plotutils,
+    cowplot
 RoxygenNote: 7.1.1
