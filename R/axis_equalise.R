@@ -1,5 +1,15 @@
 get_axis_equalise_limits <- function(data, facet_level_combn_tbl, marker,
                                      limits_equal_across){
+
+  if(limits_equal_cross = 'none'){
+    # now, get
+
+  }
+  if(limits_equal_across = 'all'){
+
+
+
+  }
   if(!limits_equal || limits_equal_within == 'plot'){
     limits_expand_list <- purrr::map(facet_level_combn_tbl[[1]], function(level_x){
       purrr::map(facet_level_combn_tbl[[2]], function(level_y){
