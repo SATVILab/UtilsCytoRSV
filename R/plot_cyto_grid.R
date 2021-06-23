@@ -37,16 +37,16 @@
 #'
 #' @return list with named elements 'p_list' and/or 'p_grid', depending on
 #' values of \code{return_grid} and \code{return_plots}.
-data <- ex_tbl
-lab <- NULL; limits_expand <- NULL; limits_equal_within_plot <- FALSE; font_size <- 14
-limits_equal_across <- list('x' = 'all', 'y' = 'all') # could also be 'marker' (make it the same within each marker, wherever it is)
-facet <- c("x" = 'marker', "y" = 'sampleid')
+#data <- ex_tbl
+#lab <- NULL; limits_expand <- NULL; limits_equal_within_plot <- FALSE; font_size <- 14
+#limits_equal_across <- list('x' = 'all', 'y' = 'all') # could also be 'marker' (make it the same within each marker, wherever it is)
+#facet <- c("x" = 'marker', "y" = 'sampleid')
 plot_cyto_grid <- function(
   data,
   marker,
   lab = NULL,
   facet = NULL,
-  facet_subset = ,
+  facet_subset = NULL,
   facet_plot = NULL,
   n_col = NULL,
   limits_expand = NULL,

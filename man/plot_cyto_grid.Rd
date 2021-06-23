@@ -9,10 +9,12 @@ plot_cyto_grid(
   marker,
   lab = NULL,
   facet = NULL,
+  facet_subset = NULL,
+  facet_plot = NULL,
   n_col = NULL,
   limits_expand = NULL,
-  limits_equal = FALSE,
-  limits_equal_within = "plot",
+  limits_equal_within_plot = FALSE,
+  limits_equal_across = c(x = "all", y = "all"),
   font_size = 14,
   return_plots = FALSE,
   return_grid = TRUE
@@ -31,7 +33,19 @@ the axis titles for marker are selected using it.}
 \item{facet}{named character vector. If not provided, then will facet column-wise
 across each element of \code{marker}. If provided, then may have names \code{'x'} and
 \code{'y'}, which means that the corresponding element specifies the
-variable that is expanded along the x- and y-axis, respectively.}
+variable that is held constant along the x- and y-axes respectively.
+For example, if \code{facet = c('x' = 'subjectid', y = 'visittype')},
+then each row will correspond to one subject and each column will
+correspond to one visittype.
+A special option is to set an element of \code{facet} to \code{'marker'}. This
+means, in a sense, the opposite to before: now all elements in \code{marker} (which
+must now be a list) are the values that are plotted along a given axis. FOr example,
+if \code{facet = c('x' = 'sampleid', y = 'marker')}, then each row will
+correspond to a particular value of 'sampleid' and each column will
+correspond to a particular element of \code{marker}. In that case, if
+\code{marker = list(c('v1', 'v2'), c('v3', 'v4')}, then the first
+column will be plots of the variable \code{'V2'} against the variable \code{'V1'}. The second
+column will be plots of the variable \code{'V4'} against the variable \code{'V3'}.}
 
 \item{limits_expand}{list. If not \code{NULL},
 then it is (effectively) passed onto \code{ggplot2::limits_expand} to
@@ -41,22 +55,26 @@ must consist of one numeric vector that will then force all values in the numeri
 to be included in the plot. If named, then must have names \code{x} and/or \code{y},
 with the elements again being numeric vectors that must be included in plot.}
 
-\item{limits_equal}{logical. If \code{TRUE}, then the ranges on the x- and y-axes
-must be equal. Effectively applied after expand_grid is applied. Default is \code{FALSE}.}
+\item{limits_equal_within_plot}{logical. If \code{TRUE}, then each individual plot
+will make the ranges of the x- and y-axes equal}
 
-\item{limits_equal_within}{'xy', 'x', 'y', 'plot'. Specifies
-precisely which "group" of plots are to have their axis limits made equal, from
-broader to narrower. \code{'xy'} means across all plots, \code{'x'} and \code{'y'}
-mean making equal within horizontal (x) or vertical (y) columns, and plot means
-simply within a plot. Not used presently (in development). In effect
-that means that it is always to \code{'plot'} (its present default).}
+\item{limits_equal_across}{'all','row', 'column' or 'neither'. Specifies whether
+limits for the x- and y-axes should be made equal across rows and columns,
+across rows only, across columns only or across neither rows nor columns. . If \code{'all'}, then
+every x-axis will have the same range and every y-axis will have the same range.
+If \code{'row'}, then every x- and y-axis will have the same range within a
+given column (because it's ACROSS rows, not within). If \code{'col'},
+then every x- and y-axis will have the same range withn a given row. Default is \code{'neither'}.}
 
 \item{font_size}{integer. Font size to be passed on to
 \code{cowplot::theme_cowplot(font_size = <font_size>)}.}
 
 \item{return_grid, return_plots}{logical. If \code{TRUE}, then
 the grid of plots is returned or the plots themselves are returned as a list.
-Default is \code{return_grid = TRUE} and \code{return_plots = FALSE}.}
+Default is \code{return_grid = TRUE} and \code{return_plots = FALSE}.
+
+TODO:
+Use ... to pass on any extra arguments to a given plotting function.}
 }
 \value{
 list with named elements 'p_list' and/or 'p_grid', depending on
