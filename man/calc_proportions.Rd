@@ -5,37 +5,21 @@
 \alias{calc_prop}
 \title{Calculate frequencies and proportions}
 \usage{
-calc_freq(
-  .data,
-  count_den,
-  count_num,
-  name_col_out = "freq",
-  remove_counts = FALSE,
-  warn = TRUE
-)
+calc_freq(.data, den, num, freq = "freq", remove_counts = FALSE, warn = TRUE)
 
-calc_prop(
-  .data,
-  count_den,
-  count_num,
-  name_col_out = "prop",
-  remove_counts = FALSE,
-  warn = TRUE
-)
+calc_prop(.data, den, num, prop = "prop", remove_counts = FALSE, warn = TRUE)
 }
 \arguments{
 \item{.data}{dataframe. Has column in long format, i.e. one row corresponds to
 one cell population for one sample.}
 
-\item{count_num, count_den}{character. Names of columns giving counts for
+\item{num, den}{character. Names of columns giving counts for
 numerator and denominator, respectively.}
 
-\item{name_col_out}{character. Name of output column.
-If \code{calc_freq} is used, then its default is \code{freq}.
-If \code{calc_prop} is used, then its default is \code{prop}.}
+\item{freq, pprop}{character. Name of output column.}
 
 \item{remove_counts}{logical. If \code{TRUE}, then
-\code{count_num} and \code{count_den} columns are removed
+\code{num} and \code{den} columns are removed
 after calculation. Default is \code{FALSE}.}
 
 \item{warn}{logical. If \code{TRUE}, then warnings
@@ -59,11 +43,11 @@ mock_data <- tibble::tibble(
   )
 calc_freq(
   .data = mock_data,
-  count_den = "cd4",
-  count_num = "ifng")
+  den = "cd4",
+  num = "ifng")
 calc_prop(
   .data = mock_data,
-  count_den = "cd4",
-  count_num = "ifng")
+  den = "cd4",
+  num = "ifng")
  @export
 }

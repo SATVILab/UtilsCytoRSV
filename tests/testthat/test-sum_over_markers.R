@@ -1,8 +1,8 @@
 test_that("sum_over_markers works", {
   data("data_count")
   data_test <- data_count[c(1:5, 60:64),] %>%
-    calc_prop(count_den = "count_pop_den",
-              count_num = "count_pop_num") %>%
+    calc_prop(den = "count_pop_den",
+              num = "count_pop_num") %>%
     dplyr::select(-c(count_pop_den, count_pop_num)) %>%
     dplyr::arrange(SubjectID, VisitType, stim, cyt_combn)
 

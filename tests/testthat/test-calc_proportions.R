@@ -7,16 +7,16 @@ test_that("calc proportions work", {
   expect_identical(
     mock_data %>%
       dplyr::mutate(freq = 2:3 / 20:21 * 1e2),
-    calc_freq(mock_data, count_den = "cd4", count_num = "ifng")
+    calc_freq(mock_data, den = "cd4", num = "ifng")
   )
   expect_identical(
     mock_data %>%
       dplyr::mutate(prop = 2:3 / 20:21),
-    calc_prop(mock_data, count_den = "cd4", count_num = "ifng")
+    calc_prop(mock_data, den = "cd4", num = "ifng")
   )
   expect_identical(
     mock_data %>%
       dplyr::mutate(prop = 2:3/20:21),
-    calc_prop(mock_data, count_den = "cd4", count_num = "ifng")
+    calc_prop(mock_data, den = "cd4", num = "ifng")
   )
 })
