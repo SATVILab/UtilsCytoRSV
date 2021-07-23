@@ -21,6 +21,54 @@ devtools::install_github("SATVILab/cytoutils")
 
 ## Examples
 
+``` r
+library(cytoutils)
+```
+
+### Calculation.
+
+Subtract background.
+
+``` r
+.data_test <- data.frame(
+pid = rep(c("a", "b"), each = 3),
+stim = c("mtb", "ebv", "uns") %>%
+  c("uns", "ebv", "mtb"),
+resp1 = 1:6,
+resp2 = 17:12 * 2
+)
+data_out <- subtract_background(
+ .data = .data_test,
+ grp = "pid",
+ stim = "stim",
+ uns = "uns",
+ resp = c("resp1", "resp2"),
+ remove_uns = FALSE
+)
+```
+
+Sum over marker(s).
+
+``` r
+data("data_count")
+data_test <- data_count %>%
+  calc_prop(count_den = "count_pop_den",
+            count_num = "count_pop_num") %>%
+  dplyr::select(-c(count_pop_den, count_pop_num)) %>%
+  dplyr::arrange(SubjectID, VisitType, stim, cyt_combn)
+
+data_out <- sum_over_markers(
+  .data = data_test,
+  grp = c("SubjectID", "VisitType", "stim"),
+  cmbn = "cyt_combn",
+  markers_to_sum = c("IFNg", "IL2", "IL17"),
+  levels = c("-", "+"),
+resp = "prop"
+)
+```
+
+### Plotting
+
 It provides a 2D hex plot with useful defaults.
 
 ``` r
@@ -63,10 +111,12 @@ plot_cyto(
 
 <img src="man/figures/README-plot_cyto-limits_expand-1.png" width="100%" />
 
-You can get a vector to label channels as markers using `chnl_lab`, and
-then supply this to `plot_cyto` to have better axis labels. Note that
-the inverse function, `marker_lab`, is also available to convert from
-markers to channels.
+#### Utilities
+
+You can get a vector to label channels based on the FCS file using
+`chnl_lab`, and then supply this to `plot_cyto` to have better axis
+labels. Note that the inverse function, `marker_lab`, is also available
+to convert from markers to channels.
 
 ``` r
 chnl_lab <- chnl_lab(GvHD)
