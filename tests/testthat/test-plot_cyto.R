@@ -1,7 +1,7 @@
 test_that("plot_cyto works", {
 
   # prep data
-  data('GvHD', package = 'flowCore')
+  suppressWarnings(data('GvHD', package = 'flowCore'))
   ex_tbl <- flowCore::exprs(GvHD[[1]]) %>%
     tibble::as_tibble()
   lab_vec <- chnl_lab(data = GvHD)
