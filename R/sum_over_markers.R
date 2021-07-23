@@ -31,7 +31,6 @@
 #' non-expression by !),
 #' then use `compassutils::convert_cyt_combn_format` to
 #' convert to "standard format", e.g. "IFNg+IL2+".
-#' @importFrom rlang !! !!! ensym
 sum_over_markers <- function(.data,
                              grp = NULL,
                              cmbn,
@@ -56,10 +55,7 @@ sum_over_markers <- function(.data,
     dplyr::group_by_at(c(grp, cmbn))
 
   .data <- .data %>%
-    dplyr::summarise(resp2 = sum(.data[[resp]]),
-                     .groups = "drop")
-  .data[[resp]] <- .data$resp2
-  .data <- .data[,-which(colnames(.data) == "resp2")]
+    dplyr::summarise_at(resp, sum)
 
 
   # checks
