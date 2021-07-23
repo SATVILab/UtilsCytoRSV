@@ -7,9 +7,8 @@
 sum_over_markers(
   .data,
   grp = NULL,
-  marker,
-  ind_pos = "+",
-  ind_neg = "-",
+  cmbn,
+  levels = c("+", "-"),
   markers_to_sum = NULL,
   markers_to_keep = NULL,
   resp,
@@ -26,14 +25,6 @@ define individual groups within which responses must be summed
 If \code{NULL}, then no grouping is done.
 Default is \code{NULL}.}
 
-\item{marker}{character.
-Column specifying marker combination.}
-
-\item{ind_pos, ind_neg}{character.
-Indicators for the expression
-and non-expression, respectively.
-Defaults are "+" and "-"}
-
 \item{markers_to_sum, markers_to_keep}{character vector.
 Markers to sum over/markers to not keep. Specify
 either one. If both are specified, then markers_to_sum
@@ -46,6 +37,14 @@ Overridden by \code{markers_to_sum},
 if that is not \code{NULL}.
 Default for \code{markers_to_keep} is
 \code{NULL}.}
+
+\item{marker}{character.
+Column specifying marker combination.}
+
+\item{ind_pos, ind_neg}{character.
+Indicators for the expression
+and non-expression, respectively.
+Defaults are "+" and "-"}
 }
 \description{
 Calculate summed proportion/frequencies
@@ -56,4 +55,21 @@ If cytokine combinations are expressed in COMPASS format
 non-expression by !),
 then use `compassutils::convert_cyt_combn_format` to
 convert to "standard format", e.g. "IFNg+IL2+".
+}
+\examples{
+ data("data_count")
+ data_test <- data_count \%>\%
+   calc_prop(count_den = "count_pop_den",
+             count_num = "count_pop_num") \%>\%
+   dplyr::select(-c(count_pop_den, count_pop_num)) \%>\%
+   dplyr::arrange(SubjectID, VisitType, stim, cyt_combn)
+
+ data_out <- sum_over_markers(
+   .data = data_test,
+   grp = c("SubjectID", "VisitType", "stim"),
+   cmbn = "cyt_combn",
+   markers_to_sum = c("IFNg", "IL2", "IL17"),
+   levels = c("-", "+"),
+ resp = "prop"
+)
 }

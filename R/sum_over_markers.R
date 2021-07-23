@@ -31,6 +31,24 @@
 #' non-expression by !),
 #' then use `compassutils::convert_cyt_combn_format` to
 #' convert to "standard format", e.g. "IFNg+IL2+".
+#'
+#' @examples
+#'  data("data_count")
+#'  data_test <- data_count %>%
+#'    calc_prop(count_den = "count_pop_den",
+#'              count_num = "count_pop_num") %>%
+#'    dplyr::select(-c(count_pop_den, count_pop_num)) %>%
+#'    dplyr::arrange(SubjectID, VisitType, stim, cyt_combn)
+#'
+#'  data_out <- sum_over_markers(
+#'    .data = data_test,
+#'    grp = c("SubjectID", "VisitType", "stim"),
+#'    cmbn = "cyt_combn",
+#'    markers_to_sum = c("IFNg", "IL2", "IL17"),
+#'    levels = c("-", "+"),
+#'  resp = "prop"
+#' )
+#' @export
 sum_over_markers <- function(.data,
                              grp = NULL,
                              cmbn,
@@ -57,6 +75,8 @@ sum_over_markers <- function(.data,
   .data <- .data %>%
     dplyr::summarise_at(resp, sum)
 
+  .data <- .data %>%
+    dplyr::ungroup()
 
   # checks
 
