@@ -36,6 +36,7 @@
 #'   .data = mock_data,
 #'   count_den = "cd4",
 #'   count_num = "ifng")
+#'  @export
 calc_freq <- function(.data, count_den, count_num,
                       name_col_out = "freq",
                       remove_counts = FALSE,
@@ -57,6 +58,7 @@ calc_freq <- function(.data, count_den, count_num,
 }
 
 #' @rdname calc_proportions
+#' @export
 calc_prop <- function(.data, count_den, count_num,
                       name_col_out = "prop",
                       remove_counts = FALSE,

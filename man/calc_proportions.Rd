@@ -65,4 +65,5 @@ calc_prop(
   .data = mock_data,
   count_den = "cd4",
   count_num = "ifng")
+ @export
 }
