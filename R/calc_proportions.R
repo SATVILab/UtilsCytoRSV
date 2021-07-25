@@ -82,7 +82,3 @@ calc_prop <- function(.data, den, num,
   }
   .data
 }
-
-subtract_background <- function(.data, col_grp, col_stim, nm_uns) {
-
-}
