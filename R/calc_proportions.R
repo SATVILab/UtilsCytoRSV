@@ -8,7 +8,7 @@
 #' one cell population for one sample.
 #' @param num,den character. Names of columns giving counts for
 #' numerator and denominator, respectively.
-#' @param freq,pprop character. Name of output column.
+#' @param nm character. Name of output column.
 #' @param remove_counts logical. If \code{TRUE}, then
 #' \code{num} and \code{den} columns are removed
 #' after calculation. Default is \code{FALSE}.
@@ -36,18 +36,18 @@
 #'   num = "ifng")
 #'  @export
 calc_freq <- function(.data, den, num,
-                      freq = "freq",
+                      nm = "freq",
                       remove_counts = FALSE,
                       warn = TRUE) {
-  .data[,freq] <- .data[[num]] / .data[[den]] * 1e2
+  .data[,nm] <- .data[[num]] / .data[[den]] * 1e2
   if (remove_counts) {
     .data <- .data[,-which(colnames(.data) %in% c(den, num))]
   }
   if (warn) {
-    if (any(.data[[freq]] > 100)) {
+    if (any(.data[[nm]] > 100)) {
       warning("frequencies above 100 observed")
     }
-    if (any(.data[[freq]] < 0)) {
+    if (any(.data[[nm]] < 0)) {
       warning("frequencies below 0 observed")
     }
   }
@@ -57,26 +57,26 @@ calc_freq <- function(.data, den, num,
 #' @rdname calc_proportions
 #' @export
 calc_prop <- function(.data, den, num,
-                      prop = "prop",
+                      nm = "prop",
                       remove_counts = FALSE,
                       warn = TRUE) {
   .data <- calc_freq(
     .data = .data,
     den = den,
     num = num,
-    freq = "aweadsfajfk"
+    nm = "aweadsfajfk"
     ) %>%
     dplyr::mutate(aweadsfajfk = aweadsfajfk/1e2)
-  colnames(.data)[which(colnames(.data) == "aweadsfajfk")] <- prop
+  colnames(.data)[which(colnames(.data) == "aweadsfajfk")] <- nm
 
   if (remove_counts) {
     .data <- .data[,-which(colnames(.data) %in% c(den, num))]
   }
   if (warn) {
-    if (any(.data[[prop]] > 1)) {
+    if (any(.data[[nm]] > 1)) {
       warning("frequencies above 100 observed")
     }
-    if (any(.data[[prop]] < 0)) {
+    if (any(.data[[nm]] < 0)) {
       warning("frequencies below 0 observed")
     }
   }

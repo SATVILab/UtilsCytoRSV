@@ -5,9 +5,9 @@
 \alias{calc_prop}
 \title{Calculate frequencies and proportions}
 \usage{
-calc_freq(.data, den, num, freq = "freq", remove_counts = FALSE, warn = TRUE)
+calc_freq(.data, den, num, nm = "freq", remove_counts = FALSE, warn = TRUE)
 
-calc_prop(.data, den, num, prop = "prop", remove_counts = FALSE, warn = TRUE)
+calc_prop(.data, den, num, nm = "prop", remove_counts = FALSE, warn = TRUE)
 }
 \arguments{
 \item{.data}{dataframe. Has column in long format, i.e. one row corresponds to
@@ -16,7 +16,7 @@ one cell population for one sample.}
 \item{num, den}{character. Names of columns giving counts for
 numerator and denominator, respectively.}
 
-\item{freq, pprop}{character. Name of output column.}
+\item{nm}{character. Name of output column.}
 
 \item{remove_counts}{logical. If \code{TRUE}, then
 \code{num} and \code{den} columns are removed
