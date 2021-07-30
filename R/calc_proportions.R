@@ -1,3 +1,4 @@
+
 #' @rdname calc_proportions
 #' @title Calculate frequencies and proportions
 #'
@@ -13,7 +14,7 @@
 #' \code{num} and \code{den} columns are removed
 #' after calculation. Default is \code{FALSE}.
 #' @param warn logical. If \code{TRUE}, then warnings
-#' are printed if frequencies (proportions)
+#' are printed if non-NA frequencies (proportions)
 #' above 100 (1) or less than 0
 #' are observed. Default is \code{TRUE}.
 #'
@@ -43,10 +44,10 @@ calc_freq <- function(.data, den, num,
     .data <- .data[,-which(colnames(.data) %in% c(den, num))]
   }
   if (warn) {
-    if (any(.data[[nm]] > 100)) {
+    if (any(.data[[nm]] > 100, na.rm = TRUE)) {
       warning("frequencies above 100 observed")
     }
-    if (any(.data[[nm]] < 0)) {
+    if (any(.data[[nm]] < 0, na.rm = TRUE)) {
       warning("frequencies below 0 observed")
     }
   }
@@ -72,10 +73,10 @@ calc_prop <- function(.data, den, num,
     .data <- .data[,-which(colnames(.data) %in% c(den, num))]
   }
   if (warn) {
-    if (any(.data[[nm]] > 1)) {
+    if (any(.data[[nm]] > 1, na.rm = TRUE)) {
       warning("frequencies above 100 observed")
     }
-    if (any(.data[[nm]] < 0)) {
+    if (any(.data[[nm]] < 0, na.rm = TRUE)) {
       warning("frequencies below 0 observed")
     }
   }
