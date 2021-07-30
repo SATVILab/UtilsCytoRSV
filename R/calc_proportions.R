@@ -18,7 +18,7 @@
 #' are observed. Default is \code{TRUE}.
 #'
 #' @return A dataframe, with new column \code{freq} or \code{prop}.
-#'
+#' @export
 #' @examples
 #' library(cytoutils)
 #' mock_data <- tibble::tibble(
@@ -34,7 +34,6 @@
 #'   .data = mock_data,
 #'   den = "cd4",
 #'   num = "ifng")
-#'  @export
 calc_freq <- function(.data, den, num,
                       nm = "freq",
                       remove_counts = FALSE,

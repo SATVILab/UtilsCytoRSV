@@ -49,5 +49,4 @@ calc_prop(
   .data = mock_data,
   den = "cd4",
   num = "ifng")
- @export
 }
