@@ -59,6 +59,7 @@ subtract_background <- function(.data, grp = NULL, stim, resp, uns,
 
   if(remove_uns) .data <- .data[!.data[[stim]] == uns,]
 
-  .data
+  .data %>%
+    dplyr::ungroup()
 }
 
