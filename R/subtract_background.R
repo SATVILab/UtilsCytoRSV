@@ -49,6 +49,7 @@ subtract_background <- function(.data, grp = NULL, stim, resp, uns,
   }
 
   for (resp_curr in resp) {
+    print(resp_curr)
     .data <- .data %>%
       dplyr::mutate(resp_uns = .data[[resp_curr]][.data[[stim]] == uns])
     .data[[resp_curr]] <- .data[[resp_curr]] - .data$resp_uns
@@ -56,7 +57,7 @@ subtract_background <- function(.data, grp = NULL, stim, resp, uns,
   }
 
 
-  if(remove_uns) .data <- .data[,!.data[[stim]] == uns]
+  if(remove_uns) .data <- .data[!.data[[stim]] == uns,]
 
   .data
 }
