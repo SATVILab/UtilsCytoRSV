@@ -23,7 +23,7 @@ numerator and denominator, respectively.}
 after calculation. Default is \code{FALSE}.}
 
 \item{warn}{logical. If \code{TRUE}, then warnings
-are printed if frequencies (proportions)
+are printed if non-NA frequencies (proportions)
 above 100 (1) or less than 0
 are observed. Default is \code{TRUE}.}
 }

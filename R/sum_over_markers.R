@@ -7,23 +7,34 @@
 #' (for example, participant ID and stim).
 #' If \code{NULL}, then no grouping is done.
 #' Default is \code{NULL}.
-#' @param marker character.
-#' Column specifying marker combination.
-#' @param ind_pos,ind_neg character.
+#' @param cmbn character.
+#' Column specifying marker/channel combination.
+#' @param levels character vector of length 2.
 #' Indicators for the expression
-#' and non-expression, respectively.
-#' Defaults are "+" and "-"
+#' and non-expression.
+#' Default is \code{c("+", "-")}.
 #' @param markers_to_sum,markers_to_keep character vector.
 #' Markers to sum over/markers to not keep. Specify
 #' either one. If both are specified, then markers_to_sum
 #' is used and markers_to_keep is ignored.
 #' Default is \code{NULL}.
+#' Note that only \code{markers_to_sum} is
+#' implemented thus far.
 #' @param markers_to_keep character vector.
 #' Markers to not sum over.
 #' Overridden by \code{markers_to_sum},
 #' if that is not \code{NULL}.
 #' Default for \code{markers_to_keep} is
 #' \code{NULL}.
+#' Note that \code{markers_to_keep} is not
+#' implemented yet.
+#' @param resp character vector.
+#' Names of columns to sum over
+#' (may specify more than one, e.g. unstim and stim columns).
+#' @param out_of_range numeric vector of length 2.
+#' specifies values that are considered out of range.
+#' Nothing happens as yet if values are out of range - still
+#' needs to be implemented.
 #'
 #' @details
 #' If cytokine combinations are expressed in COMPASS format

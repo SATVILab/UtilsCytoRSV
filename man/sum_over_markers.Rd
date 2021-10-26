@@ -25,26 +25,39 @@ define individual groups within which responses must be summed
 If \code{NULL}, then no grouping is done.
 Default is \code{NULL}.}
 
+\item{cmbn}{character.
+Column specifying marker/channel combination.}
+
+\item{levels}{character vector of length 2.
+Indicators for the expression
+and non-expression.
+Default is \code{c("+", "-")}.}
+
 \item{markers_to_sum, markers_to_keep}{character vector.
 Markers to sum over/markers to not keep. Specify
 either one. If both are specified, then markers_to_sum
 is used and markers_to_keep is ignored.
-Default is \code{NULL}.}
+Default is \code{NULL}.
+Note that only \code{markers_to_sum} is
+implemented thus far.}
 
 \item{markers_to_keep}{character vector.
 Markers to not sum over.
 Overridden by \code{markers_to_sum},
 if that is not \code{NULL}.
 Default for \code{markers_to_keep} is
-\code{NULL}.}
+\code{NULL}.
+Note that \code{markers_to_keep} is not
+implemented yet.}
 
-\item{marker}{character.
-Column specifying marker combination.}
+\item{resp}{character vector.
+Names of columns to sum over
+(may specify more than one, e.g. unstim and stim columns).}
 
-\item{ind_pos, ind_neg}{character.
-Indicators for the expression
-and non-expression, respectively.
-Defaults are "+" and "-"}
+\item{out_of_range}{numeric vector of length 2.
+specifies values that are considered out of range.
+Nothing happens as yet if values are out of range - still
+needs to be implemented.}
 }
 \description{
 Calculate summed proportion/frequencies
