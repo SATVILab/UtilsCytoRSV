@@ -1,9 +1,9 @@
 Package: cytoutils
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Utility functions for working with cytometry data
 Version: 0.1.1
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Author: Miguel Rodo
+Maintainer: Miguel Rodo <rdxmig002@myuct.ac.za>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
 License: MIT + file LICENSE
@@ -24,6 +24,6 @@ Imports:
     dplyr,
     rlang,
     stringr
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Depends: 
     R (>= 2.10)
