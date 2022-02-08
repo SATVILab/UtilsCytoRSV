@@ -89,7 +89,7 @@ plot_cyto <- function(data, marker, lab = NULL,
     coord_equal()
 
   # axis limits
-  plotutils::axis_limits(
+  ggutils::axis_limits(
     p = p,
     limits_expand = limits_expand,
     limits_equal = limits_equal
