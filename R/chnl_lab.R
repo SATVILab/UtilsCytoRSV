@@ -14,33 +14,32 @@
 #' @export
 #'
 #' @examples
-#' data('GvHD', package = 'flowCore')
+#' data("GvHD", package = "flowCore")
 #' chnl_lab(GvHD)
 #' marker_lab(GvHD)
 #' fr <- GvHD[[1]]
 #' chnl_lab(fr)
-chnl_lab <- function(data){
-
+chnl_lab <- function(data) {
   fr <- switch(class(data)[1],
-               'flowFrame' = data,
-               'flowSet' = data[[1]],
-               stop('class of data not recognised'))
+    "flowFrame" = data,
+    "flowSet" = data[[1]],
+    stop("class of data not recognised")
+  )
 
   adf <- flowCore::parameters(fr)@data
   lab_vec <- setNames(adf$desc, adf$name)
-  for(i in seq_along(lab_vec)){
-    if(is.na(lab_vec[i])){
+  for (i in seq_along(lab_vec)) {
+    if (is.na(lab_vec[i])) {
       lab_vec[i] <- names(lab_vec)[i]
     }
   }
 
   lab_vec
-
 }
 
 #' @rdname chnl_lab
 #' @export
-marker_lab <- function(data){
+marker_lab <- function(data) {
   chnl_lab_vec <- chnl_lab(data)
   setNames(names(chnl_lab_vec), chnl_lab_vec)
 }

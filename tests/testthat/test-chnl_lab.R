@@ -1,5 +1,5 @@
 test_that("chnl_lab works", {
-  data('GvHD', package = 'flowCore')
+  data("GvHD", package = "flowCore")
   lab_vec <- chnl_lab(GvHD)
   expect_identical(
     lab_vec[[1]],
@@ -22,7 +22,7 @@ test_that("chnl_lab works", {
 
 
 test_that("marker_lab works", {
-  data('GvHD', package = 'flowCore')
+  data("GvHD", package = "flowCore")
   lab_vec <- marker_lab(GvHD)
   expect_identical(
     lab_vec[[1]],
@@ -32,5 +32,4 @@ test_that("marker_lab works", {
     names(lab_vec)[3],
     "CD15 FITC"
   )
-
 })

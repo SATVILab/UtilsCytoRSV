@@ -13,11 +13,11 @@
 #'
 #' @examples
 #' .data_test <- data.frame(
-#' pid = rep(c("a", "b"), each = 3),
-#'  stim = c("mtb", "ebv", "uns") %>%
-#'    c("uns", "ebv", "mtb"),
-#'  resp1 = 1:6,
-#'  resp2 = 17:12 * 2
+#'   pid = rep(c("a", "b"), each = 3),
+#'   stim = c("mtb", "ebv", "uns") %>%
+#'     c("uns", "ebv", "mtb"),
+#'   resp1 = 1:6,
+#'   resp2 = 17:12 * 2
 #' )
 #' data_out <- subtract_background(
 #'   .data = .data_test,
@@ -27,7 +27,6 @@
 #'   resp = c("resp1", "resp2"),
 #'   remove_uns = FALSE
 #' )
-#'
 #' @export
 subtract_background <- function(.data, grp = NULL, stim, resp, uns,
                                 remove_uns = TRUE) {
@@ -44,7 +43,7 @@ subtract_background <- function(.data, grp = NULL, stim, resp, uns,
     dplyr::ungroup() %>%
     dplyr::summarise(d1 = sum(n_stim != 1) > 1) %>%
     dplyr::pull(d1)
-  if(check_uns_per_group) {
+  if (check_uns_per_group) {
     stop("not every group has one unstim measurement exactly")
   }
 
@@ -53,13 +52,12 @@ subtract_background <- function(.data, grp = NULL, stim, resp, uns,
     .data <- .data %>%
       dplyr::mutate(resp_uns = .data[[resp_curr]][.data[[stim]] == uns])
     .data[[resp_curr]] <- .data[[resp_curr]] - .data$resp_uns
-    .data <- .data[,-which(colnames(.data) == "resp_uns")]
+    .data <- .data[, -which(colnames(.data) == "resp_uns")]
   }
 
 
-  if(remove_uns) .data <- .data[!.data[[stim]] == uns,]
+  if (remove_uns) .data <- .data[!.data[[stim]] == uns, ]
 
   .data %>%
     dplyr::ungroup()
 }
-

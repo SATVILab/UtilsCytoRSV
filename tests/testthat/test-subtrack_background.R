@@ -43,7 +43,7 @@ test_that("subtract_background", {
 
   expect_error(
     subtract_background(
-      .data = .data_test %>% dplyr::bind_rows(.data_test[1:3,]),
+      .data = .data_test %>% dplyr::bind_rows(.data_test[1:3, ]),
       grp = "pid",
       stim = "stim",
       uns = "uns",
@@ -51,5 +51,4 @@ test_that("subtract_background", {
       remove_uns = FALSE
     )
   )
-
 })

@@ -1,9 +1,8 @@
 test_that("plot_cyto_grid works", {
-
   testthat::skip("plot_cyto_grid not yet working")
 
   # prep data
-  data('GvHD', package = 'flowCore')
+  data("GvHD", package = "flowCore")
   ex_tbl <- flowCore::exprs(GvHD[[1]]) %>%
     tibble::as_tibble()
   lab_vec <- chnl_lab(data = GvHD)
@@ -13,7 +12,7 @@ test_that("plot_cyto_grid works", {
     c("FSC-Height", "SSC-Height"),
     c("CD15 FITC", "CD45 PE"),
     c("CD14 PerCP", "FL2-A")
-    )
+  )
 
   # tests - basic
   # ----------------
@@ -27,7 +26,7 @@ test_that("plot_cyto_grid works", {
   )
   expect_identical(
     names(p_list_out),
-    c('p_list', 'p_grid')
+    c("p_list", "p_grid")
   )
   expect_identical(
     length(p_list_out$p_list),
@@ -37,7 +36,7 @@ test_that("plot_cyto_grid works", {
     purrr::map(p_list_out$p_list, class) %>%
       unlist() %>%
       unique(),
-    c("gg", 'ggplot')
+    c("gg", "ggplot")
   )
   expect_identical(
     class(p_list_out$p_grid),
@@ -53,8 +52,8 @@ test_that("plot_cyto_grid works", {
   # -----------------
 
   # prep data
-  data('GvHD', package = 'flowCore')
-  ex_tbl <- purrr::map_df(1:3, function(i){
+  data("GvHD", package = "flowCore")
+  ex_tbl <- purrr::map_df(1:3, function(i) {
     fr <- GvHD[[i]]
 
     flowCore::exprs(fr) %>%
@@ -76,5 +75,4 @@ test_that("plot_cyto_grid works", {
     marker = marker,
     facet
   )
-
 })

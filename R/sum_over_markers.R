@@ -44,20 +44,22 @@
 #' convert to "standard format", e.g. "IFNg+IL2+".
 #'
 #' @examples
-#'  data("data_count")
-#'  data_test <- data_count %>%
-#'    calc_prop(count_den = "count_pop_den",
-#'              count_num = "count_pop_num") %>%
-#'    dplyr::select(-c(count_pop_den, count_pop_num)) %>%
-#'    dplyr::arrange(SubjectID, VisitType, stim, cyt_combn)
+#' data("data_count")
+#' data_test <- data_count %>%
+#'   calc_prop(
+#'     count_den = "count_pop_den",
+#'     count_num = "count_pop_num"
+#'   ) %>%
+#'   dplyr::select(-c(count_pop_den, count_pop_num)) %>%
+#'   dplyr::arrange(SubjectID, VisitType, stim, cyt_combn)
 #'
-#'  data_out <- sum_over_markers(
-#'    .data = data_test,
-#'    grp = c("SubjectID", "VisitType", "stim"),
-#'    cmbn = "cyt_combn",
-#'    markers_to_sum = c("IFNg", "IL2", "IL17"),
-#'    levels = c("-", "+"),
-#'  resp = "prop"
+#' data_out <- sum_over_markers(
+#'   .data = data_test,
+#'   grp = c("SubjectID", "VisitType", "stim"),
+#'   cmbn = "cyt_combn",
+#'   markers_to_sum = c("IFNg", "IL2", "IL17"),
+#'   levels = c("-", "+"),
+#'   resp = "prop"
 #' )
 #' @export
 sum_over_markers <- function(.data,
@@ -77,8 +79,9 @@ sum_over_markers <- function(.data,
   # remove markers to be summed over, so
   # we can sum within remaining levels
   .data[[cmbn]] <- remove_markers(.data[[cmbn]],
-                                  markers = markers_to_sum,
-                                  levels = levels)
+    markers = markers_to_sum,
+    levels = levels
+  )
 
   .data <- .data %>%
     dplyr::group_by_at(c(grp, cmbn))
@@ -91,6 +94,5 @@ sum_over_markers <- function(.data,
 
   # checks
 
-  .data[,cn_vec_final]
-
+  .data[, cn_vec_final]
 }

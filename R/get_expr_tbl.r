@@ -32,5 +32,4 @@ get_ecdf_list <- function(expr_tbl) {
 
   purrr::map(expr_tbl, ecdf) %>%
     setNames(colnames(expr_tbl))
-
 }

@@ -1,7 +1,7 @@
 test_that("plot_cyto works", {
 
   # prep data
-  suppressWarnings(data('GvHD', package = 'flowCore'))
+  suppressWarnings(data("GvHD", package = "flowCore"))
   ex_tbl <- flowCore::exprs(GvHD[[1]]) %>%
     tibble::as_tibble()
   lab_vec <- chnl_lab(data = GvHD)
@@ -20,14 +20,14 @@ test_that("plot_cyto works", {
       )
     ),
     c("gg", "ggplot")
-    )
+  )
 
   # relabelling
   lab_list <- plot_cyto(
     data = ex_tbl,
     marker = marker,
     lab = lab_vec
-  )$labels[c('x', 'y')]
+  )$labels[c("x", "y")]
   expect_identical(
     lab_list$x[[1]],
     "CD45 PE"
@@ -110,7 +110,7 @@ test_that("plot_cyto works", {
   expect_identical(
     p$layers[[2]]$data,
     data.frame(
-      y= c(-5e2, 1e4)
+      y = c(-5e2, 1e4)
     )
   )
 
@@ -118,8 +118,10 @@ test_that("plot_cyto works", {
   p <- plot_cyto(
     data = ex_tbl,
     marker = marker,
-    limits_expand = list(y = c(1e4, -5e2),
-                         x = c(-1e4, 2e4))
+    limits_expand = list(
+      y = c(1e4, -5e2),
+      x = c(-1e4, 2e4)
+    )
   )
   expect_identical(
     p$layers[[2]]$data,
@@ -140,8 +142,8 @@ test_that("plot_cyto works", {
   )
 
   expect_identical(
-    p$layers[[2]]$data[,1],
-    p$layers[[2]]$data[,2]
+    p$layers[[2]]$data[, 1],
+    p$layers[[2]]$data[, 2]
   )
 
   # with limits_expand
@@ -150,17 +152,19 @@ test_that("plot_cyto works", {
     data = ex_tbl,
     marker = marker,
     limits_equal = TRUE,
-    limits_expand = list(y = c(1000, 200),
-                         x = c(-1e4, 500))
+    limits_expand = list(
+      y = c(1000, 200),
+      x = c(-1e4, 500)
+    )
   )
 
   expect_identical(
-    p$layers[[2]]$data[1,] %>%
+    p$layers[[2]]$data[1, ] %>%
       as.numeric(),
     c(-1e4, -1e4)
   )
   expect_identical(
-    p$layers[[2]]$data[2,] %>%
+    p$layers[[2]]$data[2, ] %>%
       as.numeric() %>%
       round(),
     c(9222, 9222)
@@ -175,12 +179,12 @@ test_that("plot_cyto works", {
   )
 
   expect_identical(
-    p$layers[[2]]$data[1,] %>%
+    p$layers[[2]]$data[1, ] %>%
       as.numeric(),
     c(1, 1)
   )
   expect_identical(
-    p$layers[[2]]$data[2,] %>%
+    p$layers[[2]]$data[2, ] %>%
       as.numeric() %>%
       round(),
     c(1e4, 9222)
@@ -195,12 +199,12 @@ test_that("plot_cyto works", {
   )
 
   expect_identical(
-    p$layers[[2]]$data[1,] %>%
+    p$layers[[2]]$data[1, ] %>%
       as.numeric(),
     c(1, 1)
   )
   expect_identical(
-    p$layers[[2]]$data[2,] %>%
+    p$layers[[2]]$data[2, ] %>%
       as.numeric() %>%
       round(),
     c(1e4, 9222)

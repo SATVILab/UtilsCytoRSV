@@ -37,41 +37,40 @@
 #'
 #' @return list with named elements 'p_list' and/or 'p_grid', depending on
 #' values of \code{return_grid} and \code{return_plots}.
-#data <- ex_tbl
-#lab <- NULL; limits_expand <- NULL; limits_equal_within_plot <- FALSE; font_size <- 14
-#limits_equal_across <- list('x' = 'all', 'y' = 'all') # could also be 'marker' (make it the same within each marker, wherever it is)
-#facet <- c("x" = 'marker', "y" = 'sampleid')
-plot_cyto_grid <- function(
-  data,
-  marker,
-  lab = NULL,
-  facet = NULL,
-  facet_subset = NULL,
-  facet_plot = NULL,
-  n_col = NULL,
-  limits_expand = NULL,
-  limits_equal_within_plot = FALSE,
-  limits_equal_across = c(
-    "x" = "all",
-    "y" = "all"
-    ),
-  font_size = 14,
-  return_plots = FALSE,
-  return_grid = TRUE){
+# data <- ex_tbl
+# lab <- NULL; limits_expand <- NULL; limits_equal_within_plot <- FALSE; font_size <- 14
+# limits_equal_across <- list('x' = 'all', 'y' = 'all') # could also be 'marker' (make it the same within each marker, wherever it is)
+# facet <- c("x" = 'marker', "y" = 'sampleid')
+plot_cyto_grid <- function(data,
+                           marker,
+                           lab = NULL,
+                           facet = NULL,
+                           facet_subset = NULL,
+                           facet_plot = NULL,
+                           n_col = NULL,
+                           limits_expand = NULL,
+                           limits_equal_within_plot = FALSE,
+                           limits_equal_across = c(
+                             "x" = "all",
+                             "y" = "all"
+                           ),
+                           font_size = 14,
+                           return_plots = FALSE,
+                           return_grid = TRUE) {
 
   # checks
   # --------------------
-  if(!return_grid && !return_plots){
+  if (!return_grid && !return_plots) {
     stop("At least one of return_grid or return_plots must be TRUE")
   }
 
-  if(!'marker' %in% facet){
-    plot_tbl <- tibble[,c(unlist(marker), facet)]
+  if (!"marker" %in% facet) {
+    plot_tbl <- tibble[, c(unlist(marker), facet)]
     marker_vec <- unlist(marker)
   }
 
-  if(!is.null(limits_expand)){
-    if(is.null(names(limits_expand))){
+  if (!is.null(limits_expand)) {
+    if (is.null(names(limits_expand))) {
       limits_expand <- list(
         x = limits_expand[[1]],
         y = limits_expand[[1]]
@@ -81,21 +80,21 @@ plot_cyto_grid <- function(
 
 
 
-  purrr::map(facet_level_combn_tbl[[facet['x']]], function(level_x){
-    if(facet['x'] == 'marker'){
+  purrr::map(facet_level_combn_tbl[[facet["x"]]], function(level_x) {
+    if (facet["x"] == "marker") {
       marker_vec <- stringr::str_split(level_x, pattern = "~~~")[[1]]
-      plot_tbl <- data[,c(marker_vec, facet[!facet == 'marker'])]
+      plot_tbl <- data[, c(marker_vec, facet[!facet == "marker"])]
     }
-    purrr::map(facet_level_combn_tbl[[facet['y']]], function(level_y){
-      if(facet['y'] == 'marker'){
+    purrr::map(facet_level_combn_tbl[[facet["y"]]], function(level_y) {
+      if (facet["y"] == "marker") {
         marker_vec <- stringr::str_split(level_y, pattern = "~~~")[[1]]
-        plot_tbl <- data[,c(marker_vec, facet[!facet == 'marker'])]
+        plot_tbl <- data[, c(marker_vec, facet[!facet == "marker"])]
       }
-      facet_marker_non <- facet[!facet == 'marker']
-      level_vec <- c('x' = level_x, 'y' = level_y)
-      for(i in seq_along(facet_marker_non)){
+      facet_marker_non <- facet[!facet == "marker"]
+      level_vec <- c("x" = level_x, "y" = level_y)
+      for (i in seq_along(facet_marker_non)) {
         facet_axis <- names(facet_marker_non)[i]
-        plot_tbl <- plot_tbl[plot_tbl[[facet_marker_non[i]]] == level_vec[facet_axis],]
+        plot_tbl <- plot_tbl[plot_tbl[[facet_marker_non[i]]] == level_vec[facet_axis], ]
       }
       plot_cyto(
         data = plot_tbl,
@@ -115,6 +114,4 @@ plot_cyto_grid <- function(
 
 
   out_list
-
 }
-

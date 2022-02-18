@@ -37,12 +37,12 @@
 #'
 #' @examples
 #'
-#' data('GvHD', package = 'flowCore')
+#' data("GvHD", package = "flowCore")
 #' ex_tbl <- flowCore::exprs(GvHD[[1]])
 #' marker <- c("FL2-H", "FL3-H")
 #' plot_cyto(
-#'  data = ex_tbl,
-#'  marker = marker
+#'   data = ex_tbl,
+#'   marker = marker
 #' )
 #' lab_vec <- cytoutils::chnl_lab(data = GvHD)
 #' plot_cyto(
@@ -58,7 +58,7 @@ plot_cyto <- function(data, marker, lab = NULL,
 
   if (!is.data.frame(data)) stop("data must be a dataframe")
   if (!is.null(lab)) {
-    if(!is.character(lab) || is.null(names(lab))){
+    if (!is.character(lab) || is.null(names(lab))) {
       stop("lab must be a named character vector (if not NULL)")
     }
   }
@@ -70,26 +70,32 @@ plot_cyto <- function(data, marker, lab = NULL,
   # --------------------
 
   # plot_tbl
-  plot_tbl <- data[,marker]
+  plot_tbl <- data[, marker]
   colnames(plot_tbl) <- c("V1", "V2")
   # axis labels
-  if(!is.null(lab)){
+  if (!is.null(lab)) {
     marker <- lab[marker]
   }
 
-  #base plot
-  p <- ggplot(plot_tbl,
-              aes(x = V1, y = V2)) +
+  # base plot
+  p <- ggplot(
+    plot_tbl,
+    aes(x = V1, y = V2)
+  ) +
     cowplot::theme_cowplot(font_size) +
     geom_hex() +
-    scale_fill_viridis_c(trans = "log10",
-                         name = "Count") +
+    scale_fill_viridis_c(
+      trans = "log10",
+      name = "Count"
+    ) +
     cowplot::background_grid(major = "xy") +
     labs(x = marker[1], y = marker[2]) +
     coord_equal()
 
   # return now if axis_limits fn not required
-  if (is.null(limits_expand) && !limits_equal) return(p)
+  if (is.null(limits_expand) && !limits_equal) {
+    return(p)
+  }
 
   if (!requireNamespace("ggutils")) {
     if (!requireNamespace("remotes")) install.packages("remotes")
@@ -100,6 +106,5 @@ plot_cyto <- function(data, marker, lab = NULL,
     p = p,
     limits_expand = limits_expand,
     limits_equal = limits_equal
-    )
-
+  )
 }

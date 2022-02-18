@@ -26,22 +26,24 @@
 #'   pop = "cd4",
 #'   "cd4" = rnorm(10, mean = 2000, sd = 100),
 #'   "ifng" = rnorm(10, mean = 500, sd = 20)
-#'   )
+#' )
 #' calc_freq(
 #'   .data = mock_data,
 #'   den = "cd4",
-#'   num = "ifng")
+#'   num = "ifng"
+#' )
 #' calc_prop(
 #'   .data = mock_data,
 #'   den = "cd4",
-#'   num = "ifng")
+#'   num = "ifng"
+#' )
 calc_freq <- function(.data, den, num,
                       nm = "freq",
                       remove_counts = FALSE,
                       warn = TRUE) {
-  .data[,nm] <- .data[[num]] / .data[[den]] * 1e2
+  .data[, nm] <- .data[[num]] / .data[[den]] * 1e2
   if (remove_counts) {
-    .data <- .data[,-which(colnames(.data) %in% c(den, num))]
+    .data <- .data[, -which(colnames(.data) %in% c(den, num))]
   }
   if (warn) {
     if (any(.data[[nm]] > 100, na.rm = TRUE)) {
@@ -65,12 +67,12 @@ calc_prop <- function(.data, den, num,
     den = den,
     num = num,
     nm = "aweadsfajfk"
-    ) %>%
-    dplyr::mutate(aweadsfajfk = aweadsfajfk/1e2)
+  ) %>%
+    dplyr::mutate(aweadsfajfk = aweadsfajfk / 1e2)
   colnames(.data)[which(colnames(.data) == "aweadsfajfk")] <- nm
 
   if (remove_counts) {
-    .data <- .data[,-which(colnames(.data) %in% c(den, num))]
+    .data <- .data[, -which(colnames(.data) %in% c(den, num))]
   }
   if (warn) {
     if (any(.data[[nm]] > 1, na.rm = TRUE)) {
