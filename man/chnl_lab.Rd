@@ -2,12 +2,23 @@
 % Please edit documentation in R/chnl_lab.R
 \name{chnl_lab}
 \alias{chnl_lab}
+\alias{marker_lab,}
+\alias{chnl_to_marker,}
+\alias{marker_to_chnl,}
+\alias{get_marker,}
+\alias{get_chnl}
 \alias{marker_lab}
-\title{Get channel- or marker-labelling named vectors}
+\alias{chnl_to_marker}
+\alias{marker_to_chnl}
+\title{Get markers and channels}
 \usage{
 chnl_lab(data)
 
 marker_lab(data)
+
+chnl_to_marker(data)
+
+marker_to_chnl(data)
 }
 \arguments{
 \item{data}{object of class flowFrame, flowSet. Channel and corresponding
@@ -18,11 +29,17 @@ A named character vector.
 }
 \description{
 From a cytometry object (e.g. flowFrame or flowSet),
-get a named vector that converts between channel names and marker names.
-If the marker name is not available, then it is replaced with the channel name.
+either get a character vector of markers
+or channels (get_chnl and get_marker),
+or get a named vector that converts
+between channel names and marker names (e.g. chnl_to_marker).
+}
+\details{
+Note that chnl_lab is equivalent to chnl_to_marker,
+and marker_lab is equivalent to marker_to_chnl.
 }
 \examples{
-data('GvHD', package = 'flowCore')
+data("GvHD", package = "flowCore")
 chnl_lab(GvHD)
 marker_lab(GvHD)
 fr <- GvHD[[1]]

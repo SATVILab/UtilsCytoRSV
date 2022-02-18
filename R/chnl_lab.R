@@ -1,17 +1,25 @@
 #' @rdname chnl_lab
 #'
-#' @title Get channel- or marker-labelling named vectors
+#' @title Get markers and channels
 #'
 #' @description From a cytometry object (e.g. flowFrame or flowSet),
-#' get a named vector that converts between channel names and marker names.
-#' If the marker name is not available, then it is replaced with the channel name.
+#' either get a character vector of markers
+#' or channels (get_chnl and get_marker),
+#' or get a named vector that converts
+#' between channel names and marker names (e.g. chnl_to_marker).
 #'
 #' @param data object of class flowFrame, flowSet. Channel and corresponding
 #' marker names are drawn from here.
 #'
+#' @details
+#' Note that chnl_lab is equivalent to chnl_to_marker,
+#' and marker_lab is equivalent to marker_to_chnl.
+#'
 #' @return A named character vector.
 #'
 #' @export
+#'
+#' @aliases marker_lab, chnl_to_marker, marker_to_chnl, get_marker, get_chnl
 #'
 #' @examples
 #' data("GvHD", package = "flowCore")
@@ -42,4 +50,21 @@ chnl_lab <- function(data) {
 marker_lab <- function(data) {
   chnl_lab_vec <- chnl_lab(data)
   setNames(names(chnl_lab_vec), chnl_lab_vec)
+}
+
+#' @rdname chnl_lab
+#' @export
+chnl_to_marker <- chnl_lab
+
+#' @rdname chnl_lab
+#' @export
+marker_to_chnl <- marker_lab
+
+#' @export
+get_chnl <- function(data) {
+  names(chnl_lab(data))
+}
+#' @export
+get_marker <- function(data) {
+  names(marker_lab(data))
 }
