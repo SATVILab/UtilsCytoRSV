@@ -52,17 +52,17 @@
 #' )
 plot_cyto <- function(data, marker, lab = NULL,
                       limits_expand = NULL, limits_equal = FALSE,
-                      font_size = 14){
+                      font_size = 14) {
   # checks
   # -----------------
 
-  if(!is.data.frame(data)) stop("data must be a dataframe")
-  if(!is.null(lab)){
+  if (!is.data.frame(data)) stop("data must be a dataframe")
+  if (!is.null(lab)) {
     if(!is.character(lab) || is.null(names(lab))){
       stop("lab must be a named character vector (if not NULL)")
     }
   }
-  if(!is.numeric(font_size)){
+  if (!is.numeric(font_size)) {
     stop("font_size must be numeric")
   }
 
@@ -82,13 +82,20 @@ plot_cyto <- function(data, marker, lab = NULL,
               aes(x = V1, y = V2)) +
     cowplot::theme_cowplot(font_size) +
     geom_hex() +
-    scale_fill_viridis_c(trans = 'log10',
-                         name = 'Count') +
-    cowplot::background_grid(major = 'xy') +
+    scale_fill_viridis_c(trans = "log10",
+                         name = "Count") +
+    cowplot::background_grid(major = "xy") +
     labs(x = marker[1], y = marker[2]) +
     coord_equal()
 
-  # axis limits
+  # return now if axis_limits fn not required
+  if (is.null(limits_expand) && !limits_equal) return(p)
+
+  if (!requireNamespace("ggutils")) {
+    if (!requireNamespace("remotes")) install.packages("remotes")
+    remotes::install_github("SATVILab/ggutils")
+  }
+
   ggutils::axis_limits(
     p = p,
     limits_expand = limits_expand,
@@ -96,6 +103,3 @@ plot_cyto <- function(data, marker, lab = NULL,
     )
 
 }
-
-
-
