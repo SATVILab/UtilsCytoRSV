@@ -27,11 +27,11 @@ Subtract the unstim measurement from one or more columns.
 }
 \examples{
 .data_test <- data.frame(
-pid = rep(c("a", "b"), each = 3),
- stim = c("mtb", "ebv", "uns") \%>\%
-   c("uns", "ebv", "mtb"),
- resp1 = 1:6,
- resp2 = 17:12 * 2
+  pid = rep(c("a", "b"), each = 3),
+  stim = c("mtb", "ebv", "uns") \%>\%
+    c("uns", "ebv", "mtb"),
+  resp1 = 1:6,
+  resp2 = 17:12 * 2
 )
 data_out <- subtract_background(
   .data = .data_test,
@@ -41,5 +41,4 @@ data_out <- subtract_background(
   resp = c("resp1", "resp2"),
   remove_uns = FALSE
 )
-
 }

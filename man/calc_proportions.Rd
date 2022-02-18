@@ -40,13 +40,15 @@ mock_data <- tibble::tibble(
   pop = "cd4",
   "cd4" = rnorm(10, mean = 2000, sd = 100),
   "ifng" = rnorm(10, mean = 500, sd = 20)
-  )
+)
 calc_freq(
   .data = mock_data,
   den = "cd4",
-  num = "ifng")
+  num = "ifng"
+)
 calc_prop(
   .data = mock_data,
   den = "cd4",
-  num = "ifng")
+  num = "ifng"
+)
 }
