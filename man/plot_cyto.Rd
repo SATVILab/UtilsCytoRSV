@@ -8,6 +8,7 @@ plot_cyto(
   data,
   marker,
   lab = NULL,
+  coord_equal = TRUE,
   limits_expand = NULL,
   limits_equal = FALSE,
   font_size = 14
@@ -22,6 +23,15 @@ element is plotted on the x-axis.}
 
 \item{lab}{named character vector. If not \code{NULL}, then
 the axis titles for marker are selected using it.}
+
+\item{coord_equal}{logical. If \code{TRUE},
+then the \code{coord_equal} ggplot2 function is applied to
+the plot, making units take up the same visual space on the x-
+and y-axes.
+Note that this will cause plots to note be able to be aligned
+using functions like \code{cowplot::plot_grid} and 
+\code{patchwork::align_plots}.
+Default is \code{TRUE}.}
 
 \item{limits_expand}{list. If not \code{NULL},
 then it is (effectively) passed onto \code{ggplot2::limits_expand} to

@@ -20,6 +20,14 @@
 #' must be equal. Effectively applied after expand_grid is applied. Default is \code{FALSE}.
 #' @param font_size integer. Font size to be passed on to
 #' \code{cowplot::theme_cowplot(font_size = <font_size>)}.
+#' @param coord_equal logical. If \code{TRUE},
+#' then the \code{coord_equal} ggplot2 function is applied to
+#' the plot, making units take up the same visual space on the x-
+#' and y-axes.
+#' Note that this will cause plots to note be able to be aligned
+#' using functions like \code{cowplot::plot_grid} and 
+#' \code{patchwork::align_plots}.
+#' Default is \code{TRUE}.
 #'
 #' @import ggplot2
 #'
@@ -51,6 +59,7 @@
 #'   lab = lab_vec
 #' )
 plot_cyto <- function(data, marker, lab = NULL,
+                      coord_equal = TRUE,
                       limits_expand = NULL, limits_equal = FALSE,
                       font_size = 14) {
   # checks
@@ -89,16 +98,19 @@ plot_cyto <- function(data, marker, lab = NULL,
       name = "Count"
     ) +
     cowplot::background_grid(major = "xy") +
-    labs(x = marker[1], y = marker[2]) +
-    coord_equal()
+    labs(x = marker[1], y = marker[2])
+
+  if (coord_equal) p <- p + coord_equal()
 
   # return now if axis_limits fn not required
   if (is.null(limits_expand) && !limits_equal) {
     return(p)
   }
 
-  if (!requireNamespace("ggutils")) {
-    if (!requireNamespace("remotes")) install.packages("remotes")
+  if (!requireNamespace("ggutils", quietly = TRUE)) {
+    if (!requireNamespace("remotes", quietly = TRUE)) {
+      install.packages("remotes")
+    }
     remotes::install_github("SATVILab/ggutils")
   }
 
