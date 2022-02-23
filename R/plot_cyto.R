@@ -38,7 +38,7 @@
 #'    \code{cowplot::background_grid(major = 'xy')}.
 #'    \item If a hex plot, then fill colour is defined by
 #'    \code{scale_fill_viridis_c} with params \code{trans = 'log10'}.
-#'    \item axis units are equal
+#'    \item axis units are equal between the axes
 #' }
 #'
 #' @export
