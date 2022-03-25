@@ -28,6 +28,7 @@
 #' using functions like \code{cowplot::plot_grid} and 
 #' \code{patchwork::align_plots}.
 #' Default is \code{TRUE}.
+#' @param ... arguments passed to \code{ggplot2::geom_hex}.
 #'
 #' @import ggplot2
 #'
@@ -61,7 +62,7 @@
 plot_cyto <- function(data, marker, lab = NULL,
                       coord_equal = TRUE,
                       limits_expand = NULL, limits_equal = FALSE,
-                      font_size = 14) {
+                      font_size = 14, ...) {
   # checks
   # -----------------
 
@@ -85,14 +86,14 @@ plot_cyto <- function(data, marker, lab = NULL,
   if (!is.null(lab)) {
     marker <- lab[marker]
   }
-
+p
   # base plot
   p <- ggplot(
     plot_tbl,
     aes(x = V1, y = V2)
   ) +
     cowplot::theme_cowplot(font_size) +
-    geom_hex() +
+    geom_hex(...) +
     scale_fill_viridis_c(
       trans = "log10",
       name = "Count"
