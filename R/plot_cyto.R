@@ -86,7 +86,7 @@ plot_cyto <- function(data, marker, lab = NULL,
   if (!is.null(lab)) {
     marker <- lab[marker]
   }
-p
+
   # base plot
   p <- ggplot(
     plot_tbl,
