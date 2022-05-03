@@ -1,4 +1,4 @@
 library(testthat)
-library(cytoutils)
+library(UtilsCytoRSV)
 
-test_check("cytoutils")
+test_check("UtilsCytoRSV")

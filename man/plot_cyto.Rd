@@ -11,7 +11,8 @@ plot_cyto(
   coord_equal = TRUE,
   limits_expand = NULL,
   limits_equal = FALSE,
-  font_size = 14
+  font_size = 14,
+  ...
 )
 }
 \arguments{
@@ -46,6 +47,8 @@ must be equal. Effectively applied after expand_grid is applied. Default is \cod
 
 \item{font_size}{integer. Font size to be passed on to
 \code{cowplot::theme_cowplot(font_size = <font_size>)}.}
+
+\item{...}{arguments passed to \code{ggplot2::geom_hex}.}
 }
 \description{
 Plot a hex-plot with suitable default for a single
@@ -71,7 +74,7 @@ plot_cyto(
   data = ex_tbl,
   marker = marker
 )
-lab_vec <- cytoutils::chnl_lab(data = GvHD)
+lab_vec <- UtilsCytoRSV::chnl_lab(data = GvHD)
 plot_cyto(
   data = ex_tbl,
   marker = marker,

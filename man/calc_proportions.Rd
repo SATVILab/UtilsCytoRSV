@@ -35,7 +35,7 @@ Calculate frequencies and proprtions, and make
 warnings if out-of-range values are observed.
 }
 \examples{
-library(cytoutils)
+library(UtilsCytoRSV)
 mock_data <- tibble::tibble(
   pop = "cd4",
   "cd4" = rnorm(10, mean = 2000, sd = 100),

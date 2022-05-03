@@ -53,7 +53,7 @@
 #'   data = ex_tbl,
 #'   marker = marker
 #' )
-#' lab_vec <- cytoutils::chnl_lab(data = GvHD)
+#' lab_vec <- UtilsCytoRSV::chnl_lab(data = GvHD)
 #' plot_cyto(
 #'   data = ex_tbl,
 #'   marker = marker,

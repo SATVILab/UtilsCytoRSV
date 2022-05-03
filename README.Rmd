@@ -13,31 +13,31 @@ knitr::opts_chunk$set(
 )
 ```
 
-# cytoutils
+# UtilsCytoRSV
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of `cytoutils` is to facilitate common data processing and visualisation tasks regarding cytometry data (with CyTOF and flow in mind).
+The goal of `UtilsCytoRSV` is to facilitate common data processing and visualisation tasks regarding cytometry data (with CyTOF and flow in mind).
 
 ## Installation
 
-You can install `cytoutils` from [GitHub](https://github.com/) with:
+You can install `UtilsCytoRSV` from [GitHub](https://github.com/) with:
 
 ```{r github, eval = FALSE}
-# install.packages("devtools")
-devtools::install_github("SATVILab/cytoutils")
+if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
+remotes::install_github("SATVILab/UtilsCytoRSV")
 ```
 
 ## Examples
 
 ```{r }
-library(cytoutils)
+library(UtilsCytoRSV)
 ```
 
-### Calculation. 
+### Calculation.
 
-Subtract background. 
+Subtract background.
 ```{r sub_background}
 .data_test <- data.frame(
 pid = rep(c("a", "b"), each = 3),
@@ -56,12 +56,12 @@ data_out <- subtract_background(
 )
 ```
 
-Sum over marker(s). 
+Sum over marker(s).
 ```{r sum_over_markers}
 data("data_count")
 data_test <- data_count %>%
-  calc_prop(count_den = "count_pop_den",
-            count_num = "count_pop_num") %>%
+  calc_prop(den = "count_pop_den",
+            num = "count_pop_num") %>%
   dplyr::select(-c(count_pop_den, count_pop_num)) %>%
   dplyr::arrange(SubjectID, VisitType, stim, cyt_combn)
 
@@ -77,15 +77,15 @@ resp = "prop"
 
 ### Plotting
 
-It provides a 2D hex plot with useful defaults. 
+It provides a 2D hex plot with useful defaults.
 ```{r setup, fig.height = 2}
-library(cytoutils)
+library(UtilsCytoRSV)
 data('GvHD', package = 'flowCore')
 ex_tbl <- flowCore::exprs(GvHD[[1]]) %>%
   tibble::as_tibble()
 marker <- c("FL2-H", "FL3-H")
 plot_cyto(
-  data = ex_tbl, 
+  data = ex_tbl,
   marker = marker
 )
 ```
@@ -93,8 +93,8 @@ plot_cyto(
 The ranges can be made equal between the x- and y-axes.
 ```{r plot_cyto-limits_equal}
 plot_cyto(
-  data = ex_tbl, 
-  marker = marker, 
+  data = ex_tbl,
+  marker = marker,
   limits_equal = TRUE
 )
 ```
@@ -102,20 +102,20 @@ plot_cyto(
 Each axis can be forced to include particular values (especially useful if viewing gated data, which may have only positive-expressing cells and you then want to show that there are no negative-expressing cells).
 ```{r plot_cyto-limits_expand}
 plot_cyto(
-  data = ex_tbl, 
-  marker = marker, 
+  data = ex_tbl,
+  marker = marker,
   limits_expand = list(y = -5e3)
 )
 ```
 
 #### Utilities
 
-You can get a vector to label channels based on the FCS file using `chnl_lab`, and then supply this to `plot_cyto` to have better axis labels. Note that the inverse function, `marker_lab`, is also available to convert from markers to channels. 
+You can get a vector to label channels based on the FCS file using `chnl_lab`, and then supply this to `plot_cyto` to have better axis labels. Note that the inverse function, `marker_lab`, is also available to convert from markers to channels.
 ```{r plot_cyto-lab}
 chnl_lab <- chnl_lab(GvHD)
 plot_cyto(
-  data = ex_tbl, 
-  marker = marker, 
+  data = ex_tbl,
+  marker = marker,
   lab = chnl_lab,
   limits_equal = TRUE
 )

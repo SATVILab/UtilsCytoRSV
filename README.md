@@ -1,28 +1,28 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# cytoutils
+# UtilsCytoRSV
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of `cytoutils` is to facilitate common data processing and
+The goal of `UtilsCytoRSV` is to facilitate common data processing and
 visualisation tasks regarding cytometry data (with CyTOF and flow in
 mind).
 
 ## Installation
 
-You can install `cytoutils` from [GitHub](https://github.com/) with:
+You can install `UtilsCytoRSV` from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("SATVILab/cytoutils")
+if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
+remotes::install_github("SATVILab/UtilsCytoRSV")
 ```
 
 ## Examples
 
 ``` r
-library(cytoutils)
+library(UtilsCytoRSV)
 ```
 
 ### Calculation.
@@ -45,6 +45,8 @@ data_out <- subtract_background(
  resp = c("resp1", "resp2"),
  remove_uns = FALSE
 )
+#> [1] "resp1"
+#> [1] "resp2"
 ```
 
 Sum over marker(s).
@@ -52,8 +54,8 @@ Sum over marker(s).
 ``` r
 data("data_count")
 data_test <- data_count %>%
-  calc_prop(count_den = "count_pop_den",
-            count_num = "count_pop_num") %>%
+  calc_prop(den = "count_pop_den",
+            num = "count_pop_num") %>%
   dplyr::select(-c(count_pop_den, count_pop_num)) %>%
   dplyr::arrange(SubjectID, VisitType, stim, cyt_combn)
 
@@ -72,13 +74,119 @@ resp = "prop"
 It provides a 2D hex plot with useful defaults.
 
 ``` r
-library(cytoutils)
+library(UtilsCytoRSV)
 data('GvHD', package = 'flowCore')
+#> Warning in load(zfile, envir = tmp_env): strings not representable in native
+#> encoding will be translated to UTF-8
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
+
+#> Warning in load(zfile, envir = tmp_env): input string 'CELLQuestª' cannot be
+#> translated to UTF-8, is it valid in 'UTF-8' ?
 ex_tbl <- flowCore::exprs(GvHD[[1]]) %>%
   tibble::as_tibble()
 marker <- c("FL2-H", "FL3-H")
 plot_cyto(
-  data = ex_tbl, 
+  data = ex_tbl,
   marker = marker
 )
 ```
@@ -89,8 +197,8 @@ The ranges can be made equal between the x- and y-axes.
 
 ``` r
 plot_cyto(
-  data = ex_tbl, 
-  marker = marker, 
+  data = ex_tbl,
+  marker = marker,
   limits_equal = TRUE
 )
 ```
@@ -103,8 +211,8 @@ you then want to show that there are no negative-expressing cells).
 
 ``` r
 plot_cyto(
-  data = ex_tbl, 
-  marker = marker, 
+  data = ex_tbl,
+  marker = marker,
   limits_expand = list(y = -5e3)
 )
 ```
@@ -121,8 +229,8 @@ to convert from markers to channels.
 ``` r
 chnl_lab <- chnl_lab(GvHD)
 plot_cyto(
-  data = ex_tbl, 
-  marker = marker, 
+  data = ex_tbl,
+  marker = marker,
   lab = chnl_lab,
   limits_equal = TRUE
 )

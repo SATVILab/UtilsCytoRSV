@@ -1,11 +1,10 @@
-Package: UtilsCytoRMR
+Package: UtilsCytoRSV
 Type: Package
 Title: Utility functions for working with cytometry data
 Version: 0.1.1.9000
 Author: Miguel Rodo
 Maintainer: Miguel Rodo <rdxmig002@myuct.ac.za>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Utility functions for working with cytometry data
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -28,4 +27,4 @@ RoxygenNote: 7.1.2
 Depends: 
     R (>= 2.10)
 Remotes:  
-    SATVILab/ggutils
+    SATVILab/UtilsGGSV

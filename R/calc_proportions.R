@@ -21,7 +21,7 @@
 #' @return A dataframe, with new column \code{freq} or \code{prop}.
 #' @export
 #' @examples
-#' library(cytoutils)
+#' library(UtilsCytoRSV)
 #' mock_data <- tibble::tibble(
 #'   pop = "cd4",
 #'   "cd4" = rnorm(10, mean = 2000, sd = 100),
