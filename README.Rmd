@@ -80,7 +80,7 @@ resp = "prop"
 It provides a 2D hex plot with useful defaults.
 ```{r setup, fig.height = 2}
 library(UtilsCytoRSV)
-data('GvHD', package = 'flowCore')
+suppressWarnings(data("GvHD", package = "flowCore"))
 ex_tbl <- flowCore::exprs(GvHD[[1]]) %>%
   tibble::as_tibble()
 marker <- c("FL2-H", "FL3-H")
