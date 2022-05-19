@@ -28,13 +28,14 @@
 #' fr <- GvHD[[1]]
 #' chnl_lab(fr)
 chnl_lab <- function(data) {
-  fr <- switch(class(data)[1],
-    "flowFrame" = data,
-    "flowSet" = data[[1]],
+  adf <- switch(class(data)[1],
+    "flowFrame" = flowCore::parameters(data)@data,
+    "flowSet" =  flowCore::parameters(data[[1]])@data,
+    "cytoframe" = flowCore::parameters(data)@data,
+    "cytoset" = flowCore::parameters(data[[1]])@data,
     stop("class of data not recognised")
   )
 
-  adf <- flowCore::parameters(fr)@data
   lab_vec <- setNames(adf$desc, adf$name)
   for (i in seq_along(lab_vec)) {
     if (is.na(lab_vec[i])) {
