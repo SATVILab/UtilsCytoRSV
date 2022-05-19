@@ -1,6 +1,8 @@
 test_that("chnl_lab works", {
-  data("GvHD", package = "flowCore")
+  suppressWarnings(data("GvHD", package = "flowCore"))
+  
   lab_vec <- chnl_lab(GvHD)
+
   expect_identical(
     lab_vec[[1]],
     c("FSC-Height")
