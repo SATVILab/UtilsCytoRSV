@@ -75,6 +75,9 @@ plot_cyto <- function(data, marker, lab = NULL,
   if (!is.numeric(font_size)) {
     stop("font_size must be numeric")
   }
+  if (!requireNamespace("hexbin", quietly = TRUE)) {
+    utils::install.packages("hexbin")
+  }
 
   # prep
   # --------------------
