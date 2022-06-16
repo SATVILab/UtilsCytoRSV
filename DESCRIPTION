@@ -11,8 +11,7 @@ LazyData: true
 Suggests: 
     DataTidyACSCyTOFCytokinesTCells,
     testthat (>= 3.0.0),
-    usethis,
-    ggutils (>= 0.1.0)
+    usethis
 Config/testthat/edition: 3
 Imports: 
     tibble,
@@ -22,7 +21,8 @@ Imports:
     ggplot2,
     cowplot,
     dplyr,
-    stringr
+    stringr,
+    UtilsGGSV
 RoxygenNote: 7.1.2
 Depends: 
     R (>= 2.10)

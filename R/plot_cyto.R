@@ -111,14 +111,14 @@ plot_cyto <- function(data, marker, lab = NULL,
     return(p)
   }
 
-  if (!requireNamespace("ggutils", quietly = TRUE)) {
+  if (!requireNamespace("UtilsGGSV", quietly = TRUE)) {
     if (!requireNamespace("remotes", quietly = TRUE)) {
       install.packages("remotes")
     }
-    remotes::install_github("SATVILab/ggutils")
+    remotes::install_github("SATVILab/UtilsGGSV")
   }
 
-  ggutils::axis_limits(
+  UtilsGGSV::axis_limits(
     p = p,
     limits_expand = limits_expand,
     limits_equal = limits_equal
