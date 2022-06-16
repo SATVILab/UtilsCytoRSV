@@ -28,6 +28,11 @@
 #' using functions like \code{cowplot::plot_grid} and 
 #' \code{patchwork::align_plots}.
 #' Default is \code{TRUE}.
+#' @param exc_min logical.
+#' If \code{TRUE}, then cells with expression equal to the minimum
+#' value of one or both of the variables plotted are excluded.
+#' Useful for CyTOF data.
+#' Default is \code{FALSE}.
 #' @param ... arguments passed to \code{ggplot2::geom_hex}.
 #'
 #' @import ggplot2
@@ -62,7 +67,7 @@
 plot_cyto <- function(data, marker, lab = NULL,
                       coord_equal = TRUE,
                       limits_expand = NULL, limits_equal = FALSE,
-                      font_size = 14, ...) {
+                      font_size = 14, exc_min = FALSE, ...) {
   # checks
   # -----------------
 
@@ -85,6 +90,13 @@ plot_cyto <- function(data, marker, lab = NULL,
   # plot_tbl
   plot_tbl <- data[, marker]
   colnames(plot_tbl) <- c("V1", "V2")
+  if (exc_min) {
+    plot_tbl <- plot_tbl |>
+      dplyr::filter(
+        V1 > min(V1),
+        V2 > min(V2)
+      )
+  }
   # axis labels
   if (!is.null(lab)) {
     marker <- lab[marker]
