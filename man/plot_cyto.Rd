@@ -12,6 +12,7 @@ plot_cyto(
   limits_expand = NULL,
   limits_equal = FALSE,
   font_size = 14,
+  exc_min = FALSE,
   ...
 )
 }
@@ -47,6 +48,12 @@ must be equal. Effectively applied after expand_grid is applied. Default is \cod
 
 \item{font_size}{integer. Font size to be passed on to
 \code{cowplot::theme_cowplot(font_size = <font_size>)}.}
+
+\item{exc_min}{logical.
+If \code{TRUE}, then cells with expression equal to the minimum
+value of one or both of the variables plotted are excluded.
+Useful for CyTOF data.
+Default is \code{FALSE}.}
 
 \item{...}{arguments passed to \code{ggplot2::geom_hex}.}
 }
