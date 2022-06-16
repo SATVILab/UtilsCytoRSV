@@ -210,3 +210,20 @@ test_that("plot_cyto works", {
     c(1e4, 9222)
   )
 })
+
+test_that("plot_cyto works for univariate data", {
+  set.seed(1)
+  plot_tbl <- data.frame(x = rnorm(20))
+  p <- plot_cyto(
+    plot_tbl, marker = "x", geom_uni = "histogram"
+  )
+  p <- plot_cyto(
+    plot_tbl,
+    marker = "x", geom_uni = "density"
+  )
+  p <- plot_cyto(
+    plot_tbl,
+    marker = "x", geom_uni = "density", exc_min = TRUE
+  )
+  expect_identical(nrow(p$data), 19L)
+})

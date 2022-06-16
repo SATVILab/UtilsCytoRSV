@@ -13,6 +13,7 @@ plot_cyto(
   limits_equal = FALSE,
   font_size = 14,
   exc_min = FALSE,
+  geom_uni = "histogram",
   ...
 )
 }
@@ -31,7 +32,7 @@ then the \code{coord_equal} ggplot2 function is applied to
 the plot, making units take up the same visual space on the x-
 and y-axes.
 Note that this will cause plots to note be able to be aligned
-using functions like \code{cowplot::plot_grid} and 
+using functions like \code{cowplot::plot_grid} and
 \code{patchwork::align_plots}.
 Default is \code{TRUE}.}
 
@@ -55,7 +56,13 @@ value of one or both of the variables plotted are excluded.
 Useful for CyTOF data.
 Default is \code{FALSE}.}
 
-\item{...}{arguments passed to \code{ggplot2::geom_hex}.}
+\item{geom_uni}{"density" or "histogram".
+Specifies ggplot2 geom to use
+for univariate data.
+Default is \code{"histogram"}.}
+
+\item{...}{arguments passed to \code{ggplot2::geom_hex} (for bivariate data)
+or whichever geom is used for univariate data.}
 }
 \description{
 Plot a hex-plot with suitable default for a single

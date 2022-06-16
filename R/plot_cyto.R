@@ -25,7 +25,7 @@
 #' the plot, making units take up the same visual space on the x-
 #' and y-axes.
 #' Note that this will cause plots to note be able to be aligned
-#' using functions like \code{cowplot::plot_grid} and 
+#' using functions like \code{cowplot::plot_grid} and
 #' \code{patchwork::align_plots}.
 #' Default is \code{TRUE}.
 #' @param exc_min logical.
@@ -33,7 +33,13 @@
 #' value of one or both of the variables plotted are excluded.
 #' Useful for CyTOF data.
 #' Default is \code{FALSE}.
-#' @param ... arguments passed to \code{ggplot2::geom_hex}.
+#' @param geom_uni
+#' "density" or "histogram".
+#' Specifies ggplot2 geom to use
+#' for univariate data.
+#' Default is \code{"histogram"}.
+#' @param ... arguments passed to \code{ggplot2::geom_hex} (for bivariate data)
+#' or whichever geom is used for univariate data.
 #'
 #' @import ggplot2
 #'
@@ -48,6 +54,7 @@
 #' }
 #'
 #' @export
+#' @import ggplot2
 #'
 #' @examples
 #'
@@ -67,7 +74,8 @@
 plot_cyto <- function(data, marker, lab = NULL,
                       coord_equal = TRUE,
                       limits_expand = NULL, limits_equal = FALSE,
-                      font_size = 14, exc_min = FALSE, ...) {
+                      font_size = 14, exc_min = FALSE,
+                      geom_uni = "histogram", ...) {
   # checks
   # -----------------
 
@@ -87,52 +95,97 @@ plot_cyto <- function(data, marker, lab = NULL,
   # prep
   # --------------------
 
+  n_marker <- min(2, length(marker))
+  marker <- marker[seq_len(n_marker)]
+
   # plot_tbl
-  plot_tbl <- data[, marker]
-  colnames(plot_tbl) <- c("V1", "V2")
+  plot_tbl <- data[, marker, drop = FALSE]
+  colnames(plot_tbl) <- c("V1", "V2")[seq_len(n_marker)]
   if (exc_min) {
     plot_tbl <- plot_tbl |>
       dplyr::filter(
-        V1 > min(V1),
-        V2 > min(V2)
+        V1 > min(V1)
       )
+    if (n_marker == 2) {
+      plot_tbl <- plot_tbl |>
+        dplyr::filter(
+          V2 > min(V2)
+        )
+    }
   }
+
   # axis labels
   if (!is.null(lab)) {
     marker <- lab[marker]
   }
 
   # base plot
-  p <- ggplot(
-    plot_tbl,
-    aes(x = V1, y = V2)
-  ) +
-    cowplot::theme_cowplot(font_size) +
-    geom_hex(...) +
-    scale_fill_viridis_c(
-      trans = "log10",
-      name = "Count"
+  if (n_marker == 2) {
+    p <- ggplot(
+      plot_tbl,
+      aes(x = V1, y = V2)
     ) +
-    cowplot::background_grid(major = "xy") +
-    labs(x = marker[1], y = marker[2])
+      cowplot::theme_cowplot(font_size) +
+      geom_hex(...) +
+      scale_fill_viridis_c(
+        trans = "log10",
+        name = "Count"
+      ) +
+      cowplot::background_grid(major = "xy") +
+      labs(x = marker[1], y = marker[2])
 
-  if (coord_equal) p <- p + coord_equal()
+    if (coord_equal) p <- p + coord_equal()
 
-  # return now if axis_limits fn not required
-  if (is.null(limits_expand) && !limits_equal) {
+    # return now if axis_limits fn not required
+    if (is.null(limits_expand) && !limits_equal) {
+      return(p)
+    }
+
+    if (!requireNamespace("UtilsGGSV", quietly = TRUE)) {
+      if (!requireNamespace("remotes", quietly = TRUE)) {
+        install.packages("remotes")
+      }
+      remotes::install_github("SATVILab/UtilsGGSV")
+    }
+
     return(p)
   }
 
-  if (!requireNamespace("UtilsGGSV", quietly = TRUE)) {
-    if (!requireNamespace("remotes", quietly = TRUE)) {
-      install.packages("remotes")
+  geom_uni_gg <- switch(geom_uni,
+    "histogram" = do.call(
+      ggplot2::geom_histogram,
+      list(...)
+    ),
+    "density" = do.call(
+      ggplot2::geom_density,
+      list(...)
+    ),
+    stop("geom_unit value of ", geom_uni, " not recognised")
+  )
+
+  p <- ggplot(
+    plot_tbl,
+    aes(x = V1)
+  ) +
+    cowplot::theme_cowplot(font_size) +
+    cowplot::background_grid(major = "x") +
+    labs(x = marker[1]) +
+    geom_uni_gg
+
+    # return now if axis_limits fn not required
+    if (is.null(limits_expand) && !limits_equal) {
+      return(p)
     }
-    remotes::install_github("SATVILab/UtilsGGSV")
-  }
+
+    if (!requireNamespace("UtilsGGSV", quietly = TRUE)) {
+      if (!requireNamespace("remotes", quietly = TRUE)) {
+        install.packages("remotes")
+      }
+      remotes::install_github("SATVILab/UtilsGGSV")
+    }
 
   UtilsGGSV::axis_limits(
     p = p,
-    limits_expand = limits_expand,
-    limits_equal = limits_equal
+    limits_expand = limits_expand
   )
 }
