@@ -27,7 +27,7 @@
       cyt_combn, count_pop_den, count_pop_num
     ) %>%
     dplyr::mutate(
-      cyt_combn = compassutils::convert_cyt_combn_format(
+      cyt_combn = UtilsCompassSV::convert_cyt_combn_format(
         cyt_combn,
         to = "std"
       )

@@ -22,9 +22,11 @@ Imports:
     cowplot,
     dplyr,
     stringr,
-    UtilsGGSV
-RoxygenNote: 7.2.0
+    UtilsGGSV,
+    UtilsCompassSV
+RoxygenNote: 7.2.1
 Depends: 
     R (>= 2.10)
 Remotes: 
-    SATVILab/UtilsGGSV
+    SATVILab/UtilsGGSV,
+    UtilsCompassSV
