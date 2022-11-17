@@ -28,9 +28,15 @@
 #' fr <- GvHD[[1]]
 #' chnl_lab(fr)
 chnl_lab <- function(data) {
+  if (!requireNamespace("flowCore", quietly = TRUE)) {
+    if (!requireNamespace("BiocManager", quietly = TRUE)) {
+      install.packages("BiocManager")
+    }
+    BiocManager::install("flowCore")
+  }
   adf <- switch(class(data)[1],
     "flowFrame" = flowCore::parameters(data)@data,
-    "flowSet" =  flowCore::parameters(data[[1]])@data,
+    "flowSet" = flowCore::parameters(data[[1]])@data,
     "cytoframe" = flowCore::parameters(data)@data,
     "cytoset" = flowCore::parameters(data[[1]])@data,
     stop("class of data not recognised")

@@ -1,5 +1,12 @@
 test_that("plot_cyto works", {
 
+  if (!requireNamespace("flowCore", quietly = TRUE)) {
+    if (!requireNamespace("BiocManager", quietly = TRUE)) {
+      install.packages("BiocManager")
+    }
+    BiocManager::install("flowCore")
+  }
+
   # prep data
   suppressWarnings(data("GvHD", package = "flowCore"))
   ex_tbl <- flowCore::exprs(GvHD[[1]]) %>%

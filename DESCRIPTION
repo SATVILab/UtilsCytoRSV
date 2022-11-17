@@ -1,7 +1,7 @@
 Package: UtilsCytoRSV
 Type: Package
 Title: Utility functions for working with cytometry data
-Version: 0.1.1.9000
+Version: 0.1.3
 Author: Miguel Rodo
 Maintainer: Miguel Rodo <rdxmig002@myuct.ac.za>
 Description: Utility functions for working with cytometry data
@@ -15,18 +15,17 @@ Suggests:
 Config/testthat/edition: 3
 Imports: 
     tibble,
-    flowCore,
     magrittr,
     purrr,
     ggplot2,
     cowplot,
     dplyr,
     stringr,
-    UtilsGGSV,
-    UtilsCompassSV
-RoxygenNote: 7.2.1
+    UtilsGGSV
+Suggests:
+    flowCore
+RoxygenNote: 7.2.2
 Depends: 
     R (>= 2.10)
 Remotes: 
-    SATVILab/UtilsGGSV,
-    UtilsCompassSV
+    SATVILab/UtilsGGSV

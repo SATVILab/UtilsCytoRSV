@@ -74,6 +74,12 @@ resp = "prop"
 It provides a 2D hex plot with useful defaults.
 
 ``` r
+if (!requireNamespace("flowCore", quietly = TRUE)) {
+  if (!requireNamespace("BiocManager", quietly = TRUE)) {
+    install.packages("BiocManager")
+  }
+  BiocManager::install("flowCore")
+}
 library(UtilsCytoRSV)
 suppressWarnings(data("GvHD", package = "flowCore"))
 ex_tbl <- flowCore::exprs(GvHD[[1]]) %>%

@@ -1,4 +1,10 @@
 test_that("chnl_lab works", {
+  if (!requireNamespace("flowCore", quietly = TRUE)) {
+    if (!requireNamespace("BiocManager", quietly = TRUE)) {
+      install.packages("BiocManager")
+    }
+    BiocManager::install("flowCore")
+  }
   suppressWarnings(data("GvHD", package = "flowCore"))
   cs <- flowWorkspace::flowSet_to_cytoset(GvHD)
   lab_vec <- chnl_lab(GvHD)

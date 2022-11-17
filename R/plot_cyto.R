@@ -57,7 +57,12 @@
 #' @import ggplot2
 #'
 #' @examples
-#'
+#'  if (!requireNamespace("flowCore", quietly = TRUE)) {
+#'    if (!requireNamespace("BiocManager", quietly = TRUE)) {
+#'      install.packages("BiocManager")
+#'    }
+#'    BiocManager::install("flowCore")
+#'  }
 #' data("GvHD", package = "flowCore")
 #' ex_tbl <- flowCore::exprs(GvHD[[1]])
 #' marker <- c("FL2-H", "FL3-H")
