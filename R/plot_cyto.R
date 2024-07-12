@@ -12,12 +12,19 @@
 #' @param limits_expand list. If not \code{NULL},
 #' then it is (effectively) passed onto \code{ggplot2::limits_expand} to
 #' ensure that certain values are included in the plot (such as, for example, 0
-#' if that is the minimum value possible but it may not be plotted). If not named, then
-#' must consist of one numeric vector that will then force all values in the numeric value
-#' to be included in the plot. If named, then must have names \code{x} and/or \code{y},
-#' with the elements again being numeric vectors that must be included in plot.
-#' @param limits_equal logical. If \code{TRUE}, then the ranges on the x- and y-axes
-#' must be equal. Effectively applied after expand_grid is applied. Default is \code{FALSE}.
+#' if that is the minimum value possible
+#' but it may not be plotted).
+#' If not named, then
+#' must consist of one numeric vector that will
+#' then force all values in the numeric value
+#' to be included in the plot. If named, then
+#' must have names \code{x} and/or \code{y},
+#' with the elements again being numeric vectors
+#' that must be included in plot.
+#' @param limits_equal logical. If \code{TRUE},
+#' then the ranges on the x- and y-axes
+#' must be equal. Effectively applied after
+#' expand_grid is applied. Default is \code{FALSE}.
 #' @param font_size integer. Font size to be passed on to
 #' \code{cowplot::theme_cowplot(font_size = <font_size>)}.
 #' @param coord_equal logical. If \code{TRUE},
@@ -57,12 +64,12 @@
 #' @import ggplot2
 #'
 #' @examples
-#'  if (!requireNamespace("flowCore", quietly = TRUE)) {
-#'    if (!requireNamespace("BiocManager", quietly = TRUE)) {
-#'      install.packages("BiocManager")
-#'    }
-#'    BiocManager::install("flowCore")
-#'  }
+#' if (!requireNamespace("flowCore", quietly = TRUE)) {
+#'   if (!requireNamespace("BiocManager", quietly = TRUE)) {
+#'     install.packages("BiocManager")
+#'   }
+#'   BiocManager::install("flowCore")
+#' }
 #' data("GvHD", package = "flowCore")
 #' ex_tbl <- flowCore::exprs(GvHD[[1]])
 #' marker <- c("FL2-H", "FL3-H")
@@ -109,12 +116,12 @@ plot_cyto <- function(data, marker, lab = NULL,
   if (exc_min) {
     plot_tbl <- plot_tbl |>
       dplyr::filter(
-        V1 > min(V1)
+        V1 > min(V1) # nolint
       )
     if (n_marker == 2) {
       plot_tbl <- plot_tbl |>
         dplyr::filter(
-          V2 > min(V2)
+          V2 > min(V2) # nolint
         )
     }
   }
@@ -126,18 +133,22 @@ plot_cyto <- function(data, marker, lab = NULL,
 
   # base plot
   if (n_marker == 2) {
-    p <- ggplot(
+    p <- ggplot( # nolint
       plot_tbl,
-      aes(x = V1, y = V2)
+      aes(x = V1, y = V2) # nolint
     ) +
       cowplot::theme_cowplot(font_size) +
-      geom_hex(...) +
-      scale_fill_viridis_c(
+      theme( # nolint
+        plot.background = element_rect(fill = "white"), # nolint
+        panel.background = element_rect(fill = "white") # nolint
+      ) +
+      geom_hex(...) + # nolint
+      scale_fill_viridis_c( # nolint
         trans = "log10",
         name = "Count"
       ) +
       cowplot::background_grid(major = "xy") +
-      labs(x = marker[1], y = marker[2])
+      labs(x = marker[1], y = marker[2]) # nolint
 
     if (coord_equal) p <- p + coord_equal()
 
@@ -168,26 +179,26 @@ plot_cyto <- function(data, marker, lab = NULL,
     stop("geom_unit value of ", geom_uni, " not recognised")
   )
 
-  p <- ggplot(
-    plot_tbl,
-    aes(x = V1)
+  p <- ggplot( # nolint
+    plot_tbl, # nolint
+    aes(x = V1) # nolint
   ) +
     cowplot::theme_cowplot(font_size) +
     cowplot::background_grid(major = "x") +
-    labs(x = marker[1]) +
+    labs(x = marker[1]) + # nolint
     geom_uni_gg
 
-    # return now if axis_limits fn not required
-    if (is.null(limits_expand) && !limits_equal) {
-      return(p)
-    }
+  # return now if axis_limits fn not required
+  if (is.null(limits_expand) && !limits_equal) {
+    return(p)
+  }
 
-    if (!requireNamespace("UtilsGGSV", quietly = TRUE)) {
-      if (!requireNamespace("remotes", quietly = TRUE)) {
-        install.packages("remotes")
-      }
-      remotes::install_github("SATVILab/UtilsGGSV")
+  if (!requireNamespace("UtilsGGSV", quietly = TRUE)) {
+    if (!requireNamespace("remotes", quietly = TRUE)) {
+      install.packages("remotes")
     }
+    remotes::install_github("SATVILab/UtilsGGSV")
+  }
 
   UtilsGGSV::axis_limits(
     p = p,
