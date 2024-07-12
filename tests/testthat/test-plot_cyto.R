@@ -1,10 +1,9 @@
 test_that("plot_cyto works", {
-
   .install_pkg_bioc("flowCore") # nolint
 
   # prep data
   suppressWarnings(data("GvHD", package = "flowCore"))
-  ex_tbl <- flowCore::exprs(GvHD[[1]]) %>%
+  ex_tbl <- flowCore::exprs(GvHD[[1]]) |>
     tibble::as_tibble()
   lab_vec <- chnl_lab(data = GvHD)
 
@@ -161,13 +160,13 @@ test_that("plot_cyto works", {
   )
 
   expect_identical(
-    p$layers[[2]]$data[1, ] %>%
+    p$layers[[2]]$data[1, ] |>
       as.numeric(),
     c(-1e4, -1e4)
   )
   expect_identical(
-    p$layers[[2]]$data[2, ] %>%
-      as.numeric() %>%
+    p$layers[[2]]$data[2, ] |>
+      as.numeric() |>
       round(),
     c(9222, 9222)
   )
@@ -181,13 +180,13 @@ test_that("plot_cyto works", {
   )
 
   expect_identical(
-    p$layers[[2]]$data[1, ] %>%
+    p$layers[[2]]$data[1, ] |>
       as.numeric(),
     c(1, 1)
   )
   expect_identical(
-    p$layers[[2]]$data[2, ] %>%
-      as.numeric() %>%
+    p$layers[[2]]$data[2, ] |>
+      as.numeric() |>
       round(),
     c(1e4, 9222)
   )
@@ -201,13 +200,13 @@ test_that("plot_cyto works", {
   )
 
   expect_identical(
-    p$layers[[2]]$data[1, ] %>%
+    p$layers[[2]]$data[1, ] |>
       as.numeric(),
     c(1, 1)
   )
   expect_identical(
-    p$layers[[2]]$data[2, ] %>%
-      as.numeric() %>%
+    p$layers[[2]]$data[2, ] |>
+      as.numeric() |>
       round(),
     c(1e4, 9222)
   )

@@ -18,7 +18,6 @@
 #' )
 #' get_ecdf_list(expr_tbl)
 get_ecdf_list <- function(expr_tbl) {
-
   # checks
   # -------------------
   if (!"data.frame" %in% class(expr_tbl)) {
@@ -30,6 +29,6 @@ get_ecdf_list <- function(expr_tbl) {
     stop("each column must be numeric")
   }
 
-  purrr::map(expr_tbl, ecdf) %>%
+  purrr::map(expr_tbl, ecdf) |>
     setNames(colnames(expr_tbl))
 }

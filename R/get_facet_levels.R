@@ -1,6 +1,6 @@
 get_facet_levels <- function(data, marker, facet) {
-  marker_vec <- marker %>%
-    unlist() %>%
+  marker_vec <- marker |>
+    unlist() |>
     unique()
   facet_vec <- switch(as.character(!is.null(facet)),
     "TRUE" = setNames(facet, NULL),
@@ -19,8 +19,8 @@ get_facet_levels <- function(data, marker, facet) {
   facet_axis_to_Var_lab_vec <- c("x" = "Var1", "y" = "Var2")
   if ("marker" %in% facet) {
     facet_marker_axis <- names(facet)[facet == "marker"]
-    facet_Var_to_var_lab_vec <- facet_Var_to_var_lab_vec %>%
-      c("marker" %>% setNames(facet_axis_to_Var_lab_vec[facet_marker_axis]))
+    facet_Var_to_var_lab_vec <- facet_Var_to_var_lab_vec |>
+      c("marker" |> setNames(facet_axis_to_Var_lab_vec[facet_marker_axis]))
     facet_levels_list[[facet_marker_axis]] <- purrr::map_chr(
       .x = marker,
       .f = function(x) paste0(x, collapse = "~~~")
@@ -36,8 +36,8 @@ get_facet_levels <- function(data, marker, facet) {
       facet_levels_list[[facet_axis]] <- NULL
     } else {
       facet_levels_list[[facet_axis]] <- unique(data[[facet_marker_non[[i]]]])
-      facet_Var_to_var_lab_vec <- facet_Var_to_var_lab_vec %>%
-        c(facet_marker_non[i] %>% setNames(facet_axis_to_Var_lab_vec[facet_axis]))
+      facet_Var_to_var_lab_vec <- facet_Var_to_var_lab_vec |>
+        c(facet_marker_non[i] |> setNames(facet_axis_to_Var_lab_vec[facet_axis]))
     }
   }
   facet_level_combn_tbl <- expand.grid(
@@ -49,6 +49,6 @@ get_facet_levels <- function(data, marker, facet) {
   # first column specifies variable that goes specifies x-variable
   # for a given column, and second column specifies variable that
   # specifies y-value for a given row
-  facet_level_combn_tbl <- facet_level_combn_tbl[, c(facet["x"], facet["y"])] %>%
+  facet_level_combn_tbl <- facet_level_combn_tbl[, c(facet["x"], facet["y"])] |>
     dplyr::mutate_all(as.character)
 }

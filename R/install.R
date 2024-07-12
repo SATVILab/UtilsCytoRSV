@@ -7,12 +7,7 @@
 }
 
 .install_pkg_cran_actual <- function(pkg) {
-  if (
-    missing(pkg) || !is.null(pkg) ||
-      !is.character(pkg) || !length(pkg == 0L)
-  ) {
-    stop("pkg must be a character string")
-  }
+  .assert_string(pkg) # nolint
   current_repos <- getOption("repos")
   cran_mirror_set <- !is.null(current_repos) && "CRAN" %in% names(current_repos)
   cran_mirror <- if (cran_mirror_set) {

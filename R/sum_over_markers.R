@@ -45,12 +45,12 @@
 #'
 #' @examples
 #' data("data_count")
-#' data_test <- data_count %>%
+#' data_test <- data_count |>
 #'   calc_prop(
 #'     count_den = "count_pop_den",
 #'     count_num = "count_pop_num"
-#'   ) %>%
-#'   dplyr::select(-c(count_pop_den, count_pop_num)) %>%
+#'   ) |>
+#'   dplyr::select(-c(count_pop_den, count_pop_num)) |>
 #'   dplyr::arrange(SubjectID, VisitType, stim, cyt_combn)
 #'
 #' data_out <- sum_over_markers(
@@ -70,7 +70,6 @@ sum_over_markers <- function(.data,
                              markers_to_keep = NULL,
                              resp,
                              out_of_range = c(0, 1)) {
-
   # keep so that order of columns is
   # the same at the end as at the start
   cn_vec_final <- colnames(.data)
@@ -83,13 +82,13 @@ sum_over_markers <- function(.data,
     levels = levels
   )
 
-  .data <- .data %>%
+  .data <- .data |>
     dplyr::group_by_at(c(grp, cmbn))
 
-  .data <- .data %>%
+  .data <- .data |>
     dplyr::summarise_at(resp, sum)
 
-  .data <- .data %>%
+  .data <- .data |>
     dplyr::ungroup()
 
   # checks

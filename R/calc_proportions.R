@@ -1,4 +1,3 @@
-
 #' @rdname calc_proportions
 #' @title Calculate frequencies and proportions
 #'
@@ -67,7 +66,7 @@ calc_prop <- function(.data, den, num,
     den = den,
     num = num,
     nm = "aweadsfajfk"
-  ) %>%
+  ) |>
     dplyr::mutate(aweadsfajfk = aweadsfajfk / 1e2)
   colnames(.data)[which(colnames(.data) == "aweadsfajfk")] <- nm
 

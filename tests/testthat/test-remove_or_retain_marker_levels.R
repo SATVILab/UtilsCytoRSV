@@ -1,6 +1,6 @@
 test_that("removing marker levels works", {
   levels <- c("+", "-")
-  cmbn_orig <- data_count$cyt_combn[1:5] %>%
+  cmbn_orig <- data_count$cyt_combn[1:5] |>
     setNames(NULL)
   cmbn <- cmbn_orig
   markers <- c("IFNg", "IL17")

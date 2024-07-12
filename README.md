@@ -32,7 +32,7 @@ Subtract background.
 ``` r
 .data_test <- data.frame(
 pid = rep(c("a", "b"), each = 3),
-stim = c("mtb", "ebv", "uns") %>%
+stim = c("mtb", "ebv", "uns") |>
   c("uns", "ebv", "mtb"),
 resp1 = 1:6,
 resp2 = 17:12 * 2
@@ -53,10 +53,10 @@ Sum over marker(s).
 
 ``` r
 data("data_count")
-data_test <- data_count %>%
+data_test <- data_count |>
   calc_prop(den = "count_pop_den",
-            num = "count_pop_num") %>%
-  dplyr::select(-c(count_pop_den, count_pop_num)) %>%
+            num = "count_pop_num") |>
+  dplyr::select(-c(count_pop_den, count_pop_num)) |>
   dplyr::arrange(SubjectID, VisitType, stim, cyt_combn)
 
 data_out <- sum_over_markers(
@@ -82,7 +82,7 @@ if (!requireNamespace("flowCore", quietly = TRUE)) {
 }
 library(UtilsCytoRSV)
 suppressWarnings(data("GvHD", package = "flowCore"))
-ex_tbl <- flowCore::exprs(GvHD[[1]]) %>%
+ex_tbl <- flowCore::exprs(GvHD[[1]]) |>
   tibble::as_tibble()
 marker <- c("FL2-H", "FL3-H")
 plot_cyto(

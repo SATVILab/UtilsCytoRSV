@@ -10,6 +10,6 @@ add_double_backslash <- function(string) {
   vapply(seq_len(len), function(i) {
     chr <- substr(string, i, i)
     ifelse(grepl("[[:punct:]]", chr), paste0("\\", chr), chr)
-  }, "") %>%
+  }, "") |>
     paste0(collapse = "")
 }

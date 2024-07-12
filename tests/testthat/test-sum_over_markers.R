@@ -1,11 +1,11 @@
 test_that("sum_over_markers works", {
   data("data_count")
-  data_test <- data_count[c(1:5, 60:64), ] %>%
+  data_test <- data_count[c(1:5, 60:64), ] |>
     calc_prop(
       den = "count_pop_den",
       num = "count_pop_num"
-    ) %>%
-    dplyr::select(-c(count_pop_den, count_pop_num)) %>%
+    ) |>
+    dplyr::select(-c(count_pop_den, count_pop_num)) |>
     dplyr::arrange(SubjectID, VisitType, stim, cyt_combn)
 
   data_out <- sum_over_markers(
@@ -36,7 +36,7 @@ test_that("sum_over_markers works", {
   )
 
   data_out <- sum_over_markers(
-    .data = data_test %>% dplyr::mutate(prop2 = 1:10 / 1e3),
+    .data = data_test |> dplyr::mutate(prop2 = 1:10 / 1e3),
     grp = c("SubjectID", "VisitType", "stim"),
     cmbn = "cyt_combn",
     markers_to_sum = NULL,

@@ -28,7 +28,7 @@ Subtract the unstim measurement from one or more columns.
 \examples{
 .data_test <- data.frame(
   pid = rep(c("a", "b"), each = 3),
-  stim = c("mtb", "ebv", "uns") \%>\%
+  stim = c("mtb", "ebv", "uns") |>
     c("uns", "ebv", "mtb"),
   resp1 = 1:6,
   resp2 = 17:12 * 2

@@ -1,7 +1,7 @@
 test_that("subtract_background", {
   .data_test <- data.frame(
     pid = rep(c("a", "b"), each = 3),
-    stim = c("mtb", "ebv", "uns") %>%
+    stim = c("mtb", "ebv", "uns") |>
       c("uns", "ebv", "mtb"),
     resp1 = 1:6,
     resp2 = 17:12 * 2
@@ -43,7 +43,7 @@ test_that("subtract_background", {
 
   expect_error(
     subtract_background(
-      .data = .data_test %>% dplyr::bind_rows(.data_test[1:3, ]),
+      .data = .data_test |> dplyr::bind_rows(.data_test[1:3, ]),
       grp = "pid",
       stim = "stim",
       uns = "uns",

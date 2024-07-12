@@ -48,7 +48,7 @@ remove_other_markers <- function(cmbn, markers, levels) {
       markers_to_keep,
       add_double_backslash
     )
-    orig_order <- .data[[marker]][1] %>%
+    orig_order <- .data[[marker]][1] |>
       stringr::str_locate(markers_to_keep)
     markers_to_keep <- markers_to_keep[order(orig_order[, "start"])]
     markers_to_keep

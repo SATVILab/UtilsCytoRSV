@@ -71,12 +71,12 @@ convert to "standard format", e.g. "IFNg+IL2+".
 }
 \examples{
 data("data_count")
-data_test <- data_count \%>\%
+data_test <- data_count |>
   calc_prop(
     count_den = "count_pop_den",
     count_num = "count_pop_num"
-  ) \%>\%
-  dplyr::select(-c(count_pop_den, count_pop_num)) \%>\%
+  ) |>
+  dplyr::select(-c(count_pop_den, count_pop_num)) |>
   dplyr::arrange(SubjectID, VisitType, stim, cyt_combn)
 
 data_out <- sum_over_markers(

@@ -33,8 +33,6 @@
 #' TODO:
 #' Use ... to pass on any extra arguments to a given plotting function.
 #'
-#' @export
-#'
 #' @return list with named elements 'p_list' and/or 'p_grid', depending on
 #' values of \code{return_grid} and \code{return_plots}.
 # data <- ex_tbl
@@ -57,7 +55,6 @@ plot_cyto_grid <- function(data,
                            font_size = 14,
                            return_plots = FALSE,
                            return_grid = TRUE) {
-
   # checks
   # --------------------
   if (!return_grid && !return_plots) {
