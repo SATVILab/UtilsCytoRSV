@@ -1,11 +1,6 @@
 test_that("plot_cyto works", {
 
-  if (!requireNamespace("flowCore", quietly = TRUE)) {
-    if (!requireNamespace("BiocManager", quietly = TRUE)) {
-      install.packages("BiocManager")
-    }
-    BiocManager::install("flowCore")
-  }
+  .install_pkg_bioc("flowCore") # nolint
 
   # prep data
   suppressWarnings(data("GvHD", package = "flowCore"))
@@ -222,7 +217,8 @@ test_that("plot_cyto works for univariate data", {
   set.seed(1)
   plot_tbl <- data.frame(x = rnorm(20))
   p <- plot_cyto(
-    plot_tbl, marker = "x", geom_uni = "histogram"
+    plot_tbl,
+    marker = "x", geom_uni = "histogram"
   )
   p <- plot_cyto(
     plot_tbl,

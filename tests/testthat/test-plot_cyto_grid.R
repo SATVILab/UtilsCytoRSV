@@ -1,11 +1,6 @@
 test_that("plot_cyto_grid works", {
   testthat::skip("plot_cyto_grid not yet working")
-  if (!requireNamespace("flowCore", quietly = TRUE)) {
-    if (!requireNamespace("BiocManager", quietly = TRUE)) {
-      install.packages("BiocManager")
-    }
-    BiocManager::install("flowCore")
-  }
+  .install_pkg_bioc("flowCore") # nolint
   # prep data
   data("GvHD", package = "flowCore")
   ex_tbl <- flowCore::exprs(GvHD[[1]]) %>%

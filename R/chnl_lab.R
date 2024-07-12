@@ -28,12 +28,7 @@
 #' fr <- GvHD[[1]]
 #' chnl_lab(fr)
 chnl_lab <- function(data) {
-  if (!requireNamespace("flowCore", quietly = TRUE)) {
-    if (!requireNamespace("BiocManager", quietly = TRUE)) {
-      install.packages("BiocManager")
-    }
-    BiocManager::install("flowCore")
-  }
+  .install_pkg_bioc("flowCore") # nolint
   adf <- switch(class(data)[1],
     "flowFrame" = flowCore::parameters(data)@data,
     "flowSet" = flowCore::parameters(data[[1]])@data,

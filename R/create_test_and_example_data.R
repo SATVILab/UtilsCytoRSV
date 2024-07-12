@@ -9,6 +9,7 @@
   if (!requireNamespace("usethis", quietly = TRUE)) {
     install.packages("usethis")
   }
+  .install_pkg_cran("here")
 
   path_save_vec <- NULL
   if (!"DESCRIPTION" %in% list.files(here::here())) {

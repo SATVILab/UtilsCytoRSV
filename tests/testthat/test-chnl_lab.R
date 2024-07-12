@@ -1,11 +1,7 @@
 test_that("chnl_lab works", {
-  if (!requireNamespace("flowCore", quietly = TRUE)) {
-    if (!requireNamespace("BiocManager", quietly = TRUE)) {
-      install.packages("BiocManager")
-    }
-    BiocManager::install("flowCore")
-  }
+  .install_pkg_bioc("flowCore") # nolint
   suppressWarnings(data("GvHD", package = "flowCore"))
+  .install_pkg_bioc("flowWorkspace") # nolint
   cs <- flowWorkspace::flowSet_to_cytoset(GvHD)
   lab_vec <- chnl_lab(GvHD)
 
@@ -62,7 +58,9 @@ test_that("get_marker works", {
 })
 
 test_that("chnl_lab works for cytoSets", {
+  .install_pkg_bioc("flowCore") # nolint
   suppressWarnings(data("GvHD", package = "flowCore"))
+  .install_pkg_bioc("flowWorkspace") # nolint
   GvHD <- flowWorkspace::flowSet_to_cytoset(GvHD)
   lab_vec <- chnl_lab(GvHD)
 

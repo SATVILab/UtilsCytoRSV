@@ -66,7 +66,7 @@ Calculate summed proportion/frequencies
 If cytokine combinations are expressed in COMPASS format
 (in other words separate cytokines by & and specify
 non-expression by !),
-then use `UtilsCompassSV::convert_cyt_combn_format` to
+then use `compassutils::convert_cyt_combn_format` to
 convert to "standard format", e.g. "IFNg+IL2+".
 }
 \examples{

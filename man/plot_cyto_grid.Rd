@@ -50,10 +50,15 @@ column will be plots of the variable \code{'V4'} against the variable \code{'V3'
 \item{limits_expand}{list. If not \code{NULL},
 then it is (effectively) passed onto \code{ggplot2::limits_expand} to
 ensure that certain values are included in the plot (such as, for example, 0
-if that is the minimum value possible but it may not be plotted). If not named, then
-must consist of one numeric vector that will then force all values in the numeric value
-to be included in the plot. If named, then must have names \code{x} and/or \code{y},
-with the elements again being numeric vectors that must be included in plot.}
+if that is the minimum value possible
+but it may not be plotted).
+If not named, then
+must consist of one numeric vector that will
+then force all values in the numeric value
+to be included in the plot. If named, then
+must have names \code{x} and/or \code{y},
+with the elements again being numeric vectors
+that must be included in plot.}
 
 \item{limits_equal_within_plot}{logical. If \code{TRUE}, then each individual plot
 will make the ranges of the x- and y-axes equal}
