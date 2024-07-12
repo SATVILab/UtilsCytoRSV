@@ -1,7 +1,7 @@
 Package: UtilsCytoRSV
 Type: Package
 Title: Utility functions for working with cytometry data
-Version: 0.1.4
+Version: 0.1.5
 Author: Miguel Rodo
 Maintainer: Miguel Rodo <rdxmig002@myuct.ac.za>
 Description: Utility functions for working with cytometry data
