@@ -1,4 +1,4 @@
-#' @
+#' @title Sum over markers
 #' @param cmbn character vector. Each element is a strng containing
 #' levels of a given marker.
 #' @param levels character vector. Levels of the marker, e.g. c("+", "-").
