@@ -65,7 +65,7 @@ plot_cyto_grid <- function(data,
   }
 
   if (!"marker" %in% facet) {
-    plot_tbl <- tibble[, c(unlist(marker), facet)]
+    plot_tbl <- data[, c(unlist(marker), facet)]
     marker_vec <- unlist(marker)
   }
 

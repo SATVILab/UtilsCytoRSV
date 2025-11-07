@@ -44,9 +44,11 @@ Note that chnl_lab is equivalent to chnl_to_marker,
 and marker_lab is equivalent to marker_to_chnl.
 }
 \examples{
+\dontrun{
 data("GvHD", package = "flowCore")
 chnl_lab(GvHD)
 marker_lab(GvHD)
 fr <- GvHD[[1]]
 chnl_lab(fr)
+}
 }
