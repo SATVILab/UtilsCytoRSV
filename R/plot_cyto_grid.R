@@ -17,6 +17,9 @@
 #' \code{marker = list(c('v1', 'v2'), c('v3', 'v4')}, then the first
 #' column will be plots of the variable \code{'V2'} against the variable \code{'V1'}. The second
 #' column will be plots of the variable \code{'V4'} against the variable \code{'V3'}.
+#' @param facet_subset Currently unused. Reserved for future functionality.
+#' @param facet_plot Currently unused. Reserved for future functionality.
+#' @param n_col Currently unused. Reserved for future functionality.
 #' @param limits_equal_within_plot logical. If \code{TRUE}, then each individual plot
 #' will make the ranges of the x- and y-axes equal
 #' @param limits_equal_across 'all','row', 'column' or 'neither'. Specifies whether
@@ -35,6 +38,8 @@
 #'
 #' @return list with named elements 'p_list' and/or 'p_grid', depending on
 #' values of \code{return_grid} and \code{return_plots}.
+#'
+#' @export
 # data <- ex_tbl
 # lab <- NULL; limits_expand <- NULL; limits_equal_within_plot <- FALSE; font_size <- 14
 # limits_equal_across <- list('x' = 'all', 'y' = 'all') # could also be 'marker' (make it the same within each marker, wherever it is)
@@ -62,7 +67,7 @@ plot_cyto_grid <- function(data,
   }
 
   if (!"marker" %in% facet) {
-    plot_tbl <- tibble[, c(unlist(marker), facet)]
+    plot_tbl <- data[, c(unlist(marker), facet)]
     marker_vec <- unlist(marker)
   }
 

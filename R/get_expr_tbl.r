@@ -11,6 +11,8 @@
 #' \code{expr_tbl}. Its name is the name of that column,
 #' and its content is the empirical cdf of that column.
 #'
+#' @export
+#'
 #' @examples
 #' expr_tbl <- tibble::tibble(
 #'   v1 = rnorm(20),

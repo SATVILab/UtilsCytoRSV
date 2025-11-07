@@ -1,6 +1,7 @@
 #' @title Sum over markers
-#' @param cmbn character vector. Each element is a strng containing
+#' @param cmbn character vector. Each element is a string containing
 #' levels of a given marker.
+#' @param markers character vector. Names of markers to remove.
 #' @param levels character vector. Levels of the marker, e.g. c("+", "-").
 #'
 #' @return Character vector with specified markers (and corresponding

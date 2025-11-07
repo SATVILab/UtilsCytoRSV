@@ -19,14 +19,7 @@
 #' is used and markers_to_keep is ignored.
 #' Default is \code{NULL}.
 #' Note that only \code{markers_to_sum} is
-#' implemented thus far.
-#' @param markers_to_keep character vector.
-#' Markers to not sum over.
-#' Overridden by \code{markers_to_sum},
-#' if that is not \code{NULL}.
-#' Default for \code{markers_to_keep} is
-#' \code{NULL}.
-#' Note that \code{markers_to_keep} is not
+#' implemented thus far, while \code{markers_to_keep} is not
 #' implemented yet.
 #' @param resp character vector.
 #' Names of columns to sum over

@@ -7,8 +7,10 @@
 remove_markers(cmbn, markers, levels)
 }
 \arguments{
-\item{cmbn}{character vector. Each element is a strng containing
+\item{cmbn}{character vector. Each element is a string containing
 levels of a given marker.}
+
+\item{markers}{character vector. Names of markers to remove.}
 
 \item{levels}{character vector. Levels of the marker, e.g. c("+", "-").}
 }

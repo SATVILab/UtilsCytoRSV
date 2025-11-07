@@ -10,6 +10,7 @@
 \alias{marker_lab}
 \alias{chnl_to_marker}
 \alias{marker_to_chnl}
+\alias{get_marker}
 \title{Get markers and channels}
 \usage{
 chnl_lab(data)
@@ -19,6 +20,10 @@ marker_lab(data)
 chnl_to_marker(data)
 
 marker_to_chnl(data)
+
+get_chnl(data)
+
+get_marker(data)
 }
 \arguments{
 \item{data}{object of class flowFrame, flowSet. Channel and corresponding
@@ -39,9 +44,11 @@ Note that chnl_lab is equivalent to chnl_to_marker,
 and marker_lab is equivalent to marker_to_chnl.
 }
 \examples{
+\dontrun{
 data("GvHD", package = "flowCore")
 chnl_lab(GvHD)
 marker_lab(GvHD)
 fr <- GvHD[[1]]
 chnl_lab(fr)
+}
 }
