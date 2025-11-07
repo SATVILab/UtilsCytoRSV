@@ -17,6 +17,9 @@
 #' \code{marker = list(c('v1', 'v2'), c('v3', 'v4')}, then the first
 #' column will be plots of the variable \code{'V2'} against the variable \code{'V1'}. The second
 #' column will be plots of the variable \code{'V4'} against the variable \code{'V3'}.
+#' @param facet_subset Currently unused. Reserved for future functionality.
+#' @param facet_plot Currently unused. Reserved for future functionality.
+#' @param n_col Currently unused. Reserved for future functionality.
 #' @param limits_equal_within_plot logical. If \code{TRUE}, then each individual plot
 #' will make the ranges of the x- and y-axes equal
 #' @param limits_equal_across 'all','row', 'column' or 'neither'. Specifies whether

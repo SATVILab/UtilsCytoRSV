@@ -9,7 +9,9 @@
 .install_pkg_cran_actual <- function(pkg) {
   .assert_string(pkg) # nolint
   current_repos <- getOption("repos")
-  cran_mirror_set <- !is.null(current_repos) && "CRAN" %in% names(current_repos)
+  cran_mirror_set <- !is.null(current_repos) && 
+    "CRAN" %in% names(current_repos) &&
+    !identical(current_repos[["CRAN"]], "@CRAN@")
   cran_mirror <- if (cran_mirror_set) {
     current_repos[["CRAN"]]
   } else {

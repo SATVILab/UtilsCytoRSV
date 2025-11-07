@@ -47,6 +47,12 @@ correspond to a particular element of \code{marker}. In that case, if
 column will be plots of the variable \code{'V2'} against the variable \code{'V1'}. The second
 column will be plots of the variable \code{'V4'} against the variable \code{'V3'}.}
 
+\item{facet_subset}{Currently unused. Reserved for future functionality.}
+
+\item{facet_plot}{Currently unused. Reserved for future functionality.}
+
+\item{n_col}{Currently unused. Reserved for future functionality.}
+
 \item{limits_expand}{list. If not \code{NULL},
 then it is (effectively) passed onto \code{ggplot2::limits_expand} to
 ensure that certain values are included in the plot (such as, for example, 0

@@ -1,10 +1,14 @@
 Package: UtilsCytoRSV
 Type: Package
-Title: Utility functions for working with cytometry data
+Title: Utility Functions for Working with Cytometry Data
 Version: 0.1.5
-Author: Miguel Rodo
-Maintainer: Miguel Rodo <rdxmig002@myuct.ac.za>
-Description: Utility functions for working with cytometry data
+Authors@R: person(given = "Miguel",
+                  family = "Rodo",
+                  role = c("aut", "cre"),
+                  email = "rdxmig002@myuct.ac.za")
+Description: Provides utility functions for working with cytometry data including 
+    CyTOF and flow cytometry. Includes data processing, calculation, and 
+    visualization tools for cytometry analysis.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -15,7 +19,8 @@ Imports:
     ggplot2,
     cowplot,
     dplyr,
-    stringr
+    stringr,
+    stats
 Suggests: 
     UtilsCompassSV,
     here,
