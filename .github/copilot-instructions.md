@@ -53,7 +53,7 @@ This is an R package repository for utility functions for working with cytometry
    - Write unit tests for all new functionality using `testthat` (edition 3)
    - Follow existing test patterns in `tests/testthat/`
    - Tests should use `test_that()` blocks with descriptive names
-   - For functions requiring Bioconductor packages, use `.install_pkg_bioc()` helper as shown in existing tests
+   - For functions requiring Bioconductor packages, use `.install_pkg_bioc()` helper (defined in `R/install.R`) to conditionally install packages like `flowCore` and `flowWorkspace` as shown in existing tests
 
 5. **Documentation**
    - All exported functions must have complete roxygen2 documentation
