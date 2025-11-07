@@ -62,10 +62,13 @@ chnl_to_marker <- chnl_lab
 #' @export
 marker_to_chnl <- marker_lab
 
+#' @rdname chnl_lab
 #' @export
 get_chnl <- function(data) {
   names(chnl_lab(data))
 }
+
+#' @rdname chnl_lab
 #' @export
 get_marker <- function(data) {
   names(marker_lab(data))
