@@ -71,7 +71,7 @@
 #'   BiocManager::install("flowCore")
 #' }
 #' data("GvHD", package = "flowCore")
-#' ex_tbl <- flowCore::exprs(GvHD[[1]])
+#' ex_tbl <- as.data.frame(flowCore::exprs(GvHD[[1]]))
 #' marker <- c("FL2-H", "FL3-H")
 #' plot_cyto(
 #'   data = ex_tbl,

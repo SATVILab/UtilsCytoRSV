@@ -8,4 +8,5 @@
 ^\.github$
 ^\.devcontainer$
 ^\.Renviron$
+^\.Rprofile$
 ^EntireProject\.code-workspace$

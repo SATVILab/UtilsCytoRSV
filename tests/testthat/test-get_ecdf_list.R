@@ -14,6 +14,14 @@ test_that("get_ecdf_expr works", {
     get_ecdf_list(expr_tbl = data.frame(x = rnorm(1), y = "a"))
   )
 
+  # test for dataframe without column names
+  df_no_names <- data.frame(1:5, 6:10)
+  colnames(df_no_names) <- NULL
+  expect_error(
+    get_ecdf_list(expr_tbl = df_no_names),
+    "expr_tbl must have names"
+  )
+
   # good input output checks
   expect_identical(
     class(get_ecdf_list(expr_tbl)),

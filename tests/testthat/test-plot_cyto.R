@@ -13,15 +13,12 @@ test_that("plot_cyto works", {
   # ----------------
 
   # basic run
-  expect_identical(
-    class(
-      plot_cyto(
-        data = ex_tbl,
-        marker = marker
-      )
-    ),
-    c("gg", "ggplot")
+  p <- plot_cyto(
+    data = ex_tbl,
+    marker = marker
   )
+  expect_true(inherits(p, "gg"))
+  expect_true(inherits(p, "ggplot"))
 
   # relabelling
   lab_list <- plot_cyto(
@@ -48,6 +45,18 @@ test_that("plot_cyto works", {
     round(p$theme$axis.text$size),
     26
   )
+})
+
+test_that("plot_cyto works with limits_expand and limits_equal", {
+  skip_if_not_installed("UtilsGGSV")
+  .install_pkg_bioc("flowCore") # nolint
+
+  # prep data
+  suppressWarnings(data("GvHD", package = "flowCore"))
+  ex_tbl <- flowCore::exprs(GvHD[[1]]) |>
+    tibble::as_tibble()
+
+  marker <- c("FL2-H", "FL3-H")
 
   # limits_expand
   # -----------------
