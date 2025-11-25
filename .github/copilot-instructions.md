@@ -51,10 +51,11 @@ R package for cytometry data utilities (CyTOF and flow cytometry). Provides visu
 
 ```r
 #' @title Calculate proportions
-#' @param .data dataframe with counts
-#' @param den character. Denominator column name
-#' @param num character. Numerator column name
-#' @return A dataframe with new proportion column
+#' @description Calculate proportions from numerator and denominator columns.
+#' @param .data Data frame with counts.
+#' @param den Character. Denominator column name.
+#' @param num Character. Numerator column name.
+#' @return A data frame with new proportion column.
 #' @export
 calc_prop <- function(.data, den, num) {
   .data |>
