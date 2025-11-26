@@ -1,74 +1,132 @@
 # Copilot Instructions for UtilsCytoRSV
 
-This is an R package repository for utility functions for working with cytometry data (CyTOF and flow cytometry). The package provides data processing, calculation, and visualization tools for cytometry analysis.
+R package for cytometry data utilities (CyTOF and flow cytometry). Provides visualization, data processing, and calculation tools.
 
-## Code Standards
+---
 
-### Required Before Each Commit
-- Run `devtools::document()` to update documentation when functions or parameters are modified
-- Run `devtools::check()` to ensure the package passes R CMD check
-- Ensure all new functions are properly documented with roxygen2 comments
-- Update `README.Rmd` (not `README.md` directly) when adding significant new functionality, then knit to generate `README.md`
+## Code Quality
 
-### Development Flow
-- Build: `devtools::load_all()` or `devtools::build()`
-- Test: `devtools::test()` or `testthat::test_dir("tests/testthat")`
-- Check: `devtools::check()` to run R CMD check
-- Document: `devtools::document()` to generate documentation from roxygen2 comments
-- Install dependencies: The package uses `renv` for dependency management. Dependencies are listed in the `DESCRIPTION` file.
+- Make minimal, surgical changes to fix issues
+- Maintain backward compatibility when possible
+- Follow existing patterns in the codebase
+- Add tests for new functionality or bug fixes
+- Never leave trailing whitespace at the end of lines or on blank lines
 
-## Repository Structure
-- `R/`: Core R functions for cytometry data analysis
-  - `plot_cyto.R`, `plot_cyto_grid.R`: Visualization functions for cytometry data
-  - `subtract_background.R`: Background subtraction utilities
-  - `calc_proportions.R`, `sum_over_markers.R`: Data calculation functions
-  - `chnl_lab.R`: Channel labeling utilities
-  - Other utility functions for data processing
-- `tests/testthat/`: Unit tests using the testthat framework
-- `man/`: Auto-generated documentation (do not edit directly)
-- `data/`: R data objects included with the package
-- `DESCRIPTION`: Package metadata and dependencies
-- `NAMESPACE`: Auto-generated from roxygen2 (do not edit directly)
-- `.github/workflows/copilot-setup-steps.yml`: Setup steps for Copilot's development environment
+---
 
-## Key Guidelines
+## Before Committing
 
-1. **Follow R package development best practices**
-   - Use roxygen2 for all function documentation with `@title`, `@description`, `@param`, `@return`, `@examples`, and `@export` tags
-   - Follow existing code style in the package (tidyverse style preferred)
-   - Use the pipe operator `|>` (native R pipe) consistently as shown in existing code
+- Run `devtools::document()` to update documentation
+- Run `devtools::test()` for faster iteration
+- Run `devtools::check()` to ensure package passes R CMD check
 
-2. **Maintain existing package structure**
-   - All functions go in the `R/` directory with one function per file typically
-   - Each exported function should have corresponding tests in `tests/testthat/test-<function-name>.R`
-   - Use `@export` roxygen tag for functions that should be available to package users
+---
 
-3. **Dependencies**
-   - This package uses `renv` for dependency management
-   - Dependencies are specified in the `DESCRIPTION` file under `Imports` (required) or `Suggests` (optional)
-   - Core dependencies include: `tibble`, `purrr`, `ggplot2`, `cowplot`, `dplyr`, `stringr`
-   - Suggested packages include Bioconductor packages like `flowCore` and `flowWorkspace`
+## Package Structure
 
-4. **Testing**
-   - Write unit tests for all new functionality using `testthat` (edition 3)
-   - Follow existing test patterns in `tests/testthat/`
-   - Tests should use `test_that()` blocks with descriptive names
-   - For functions requiring Bioconductor packages, use `.install_pkg_bioc()` helper (defined in `R/install.R`) to conditionally install packages like `flowCore` and `flowWorkspace` as shown in existing tests
+- `R/` - Source code (use `.` prefix for internal functions)
+- `tests/testthat/` - Tests using testthat (edition 3)
+- `man/` - Auto-generated docs (DO NOT edit directly)
+- `data/` - R data objects included with package
+- `DESCRIPTION` - Package metadata and dependencies
+- `NAMESPACE` - Auto-generated from roxygen2 (DO NOT edit directly)
 
-5. **Documentation**
-   - All exported functions must have complete roxygen2 documentation
-   - Include working examples in `@examples` sections
-   - Update `README.Rmd` when adding significant user-facing features
-   - Documentation is generated with `devtools::document()` which updates `man/` and `NAMESPACE`
+---
 
-6. **Cytometry-specific considerations**
-   - This package works with CyTOF and flow cytometry data
-   - Functions often work with tibbles/data.frames where rows are cells and columns are markers/channels
-   - Visualization functions use `ggplot2` with sensible defaults for cytometry data
-   - Be aware of the distinction between markers (protein names) and channels (detector names)
+## R Coding Standards
 
-7. **Code style**
-   - Use tidyverse-style code as shown in existing functions
-   - Prefer the native pipe `|>` over `%>%`
-   - Use `dplyr` verbs for data manipulation
-   - Function parameters should use snake_case with leading dots for data parameters (e.g., `.data`)
+### Function Naming
+
+- Internal functions: prefix with `.` (e.g., `.plot_cyto_check`)
+- Exported functions: descriptive snake_case (e.g., `plot_cyto`, `subtract_background`)
+
+### Code Style
+
+- Use tidyverse style
+- Prefer native pipe `|>` over `%>%`
+- Use `dplyr` verbs for data manipulation
+- Function parameters: snake_case with leading dots for data (e.g., `.data`)
+
+### Example - Correct
+
+```r
+#' @title Calculate proportions
+#' @description Calculate proportions from numerator and denominator columns.
+#' @param .data Data frame with counts.
+#' @param den Character. Denominator column name.
+#' @param num Character. Numerator column name.
+#' @return A data frame with new proportion column.
+#' @export
+calc_prop <- function(.data, den, num) {
+  .data |>
+    dplyr::mutate(prop = .data[[num]] / .data[[den]])
+}
+```
+
+### Example - Incorrect
+
+```r
+# Missing documentation, wrong pipe, no export tag
+calcProp <- function(data, den, num) {
+  data %>% mutate(prop = data[[num]] / data[[den]])
+}
+```
+
+---
+
+## Documentation
+
+- All exported functions must have complete roxygen2 documentation
+- Required tags: `@title`, `@description`, `@param`, `@return`, `@export`
+- Include working `@examples` sections
+- Update `README.Rmd` (not `README.md` directly) for new features
+
+---
+
+## Testing
+
+- Write unit tests for all new functionality
+- Use `test_that()` blocks with descriptive names
+- Follow existing patterns in `tests/testthat/`
+- For Bioconductor packages, use `.install_pkg_bioc()` helper
+
+### Example Test
+
+```r
+test_that("calc_prop calculates proportions correctly", {
+  mock_data <- tibble::tibble(count = 100, total = 1000)
+  result <- calc_prop(mock_data, den = "total", num = "count")
+  expect_equal(result$prop, 0.1)
+})
+```
+
+---
+
+## Dependencies
+
+- Managed via `renv` and `DESCRIPTION` file
+- Core: `tibble`, `purrr`, `ggplot2`, `cowplot`, `dplyr`, `stringr`
+- Suggested: Bioconductor packages (`flowCore`, `flowWorkspace`)
+- Add to `Imports` (required) or `Suggests` (optional) in DESCRIPTION
+
+---
+
+## Cytometry-Specific Notes
+
+- Data structure: tibbles/data.frames with rows = cells, columns = markers/channels
+- Markers = protein names, Channels = detector names
+- Visualization uses `ggplot2` with sensible defaults
+
+---
+
+## Maintaining These Instructions
+
+When updating copilot instructions, follow these best practices:
+
+- Keep it concise - Files under 1000 lines (ideally under 250)
+- Structure matters - Use headings, bullets, clear sections
+- Be direct - Short, imperative rules over long paragraphs
+- Show examples - Include code samples (correct and incorrect patterns)
+- No external links - Copilot won't follow them; copy info instead
+- No vague language - Avoid "be more accurate", "identify all issues", etc.
+- Path-specific - Use `applyTo` frontmatter in topic files
