@@ -6,8 +6,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/SATVILab/UtilsCytoRSV/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/SATVILab/UtilsCytoRSV/actions/workflows/R-CMD-check.yml)
-[![Codecov test
-coverage](https://codecov.io/gh/SATVILab/UtilsCytoRSV/graph/badge.svg)](https://codecov.io/gh/SATVILab/UtilsCytoRSV)
+[![Codecov](https://codecov.io/gh/SATVILab/UtilsCytoRSV/branch/main/graph/badge.svg)](https://app.codecov.io/gh/SATVILab/UtilsCytoRSV?branch=main)
+
 <!-- badges: end -->
 
 `UtilsCytoRSV` is an R package that provides utility functions for
