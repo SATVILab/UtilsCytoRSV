@@ -10,3 +10,6 @@
 ^\.Renviron$
 ^\.Rprofile$
 ^EntireProject\.code-workspace$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

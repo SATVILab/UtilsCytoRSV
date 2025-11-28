@@ -83,6 +83,18 @@ calcProp <- function(data, den, num) {
 
 ---
 
+## pkgdown Website
+
+- The package has a pkgdown website at `https://satvilab.github.io/UtilsCytoRSV/`
+- Configuration is in `_pkgdown.yml`
+- **IMPORTANT**: When adding, removing, or changing exported functions:
+  - Update `_pkgdown.yml` reference section to include/remove the function
+  - Place functions in appropriate categories (Visualization, Channel and Marker Utilities, Calculations, Data Processing, Data)
+- When adding new vignettes, ensure they are listed in the articles section
+- Run `pkgdown::build_site()` locally to verify the website builds correctly
+
+---
+
 ## Testing
 
 - Write unit tests for all new functionality

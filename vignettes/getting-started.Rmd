@@ -1,0 +1,125 @@
+---
+title: "Getting Started with UtilsCytoRSV"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started with UtilsCytoRSV}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+
+UtilsCytoRSV is an R package that provides utility functions for working with cytometry data, including CyTOF (mass cytometry) and flow cytometry. This vignette provides an overview of the main functionality.
+
+```{r setup}
+library(UtilsCytoRSV)
+```
+
+## Visualization
+
+### Basic Plotting with `plot_cyto()`
+The `plot_cyto()` function creates 2D hex plots with useful defaults for cytometry data.
+
+```{r plot-cyto-example, fig.height=4, fig.width=6, eval=requireNamespace("flowCore", quietly = TRUE)}
+suppressWarnings(data("GvHD", package = "flowCore"))
+ex_tbl <- flowCore::exprs(GvHD[[1]]) |>
+  as.data.frame()
+marker <- c("FL2-H", "FL3-H")
+plot_cyto(
+  data = ex_tbl,
+  marker = marker
+)
+```
+
+### Channel/Marker Labeling
+Use `chnl_lab()` to get a named vector that maps channel names to marker names from an FCS file:
+
+```{r chnl-lab-example, eval=requireNamespace("flowCore", quietly = TRUE)}
+lab_vec <- chnl_lab(GvHD)
+head(lab_vec)
+```
+
+## Calculations
+
+### Frequencies and Proportions
+
+Calculate frequencies (percentage) or proportions from numerator and denominator columns using `calc_freq()` and `calc_prop()`:
+
+```{r calc-prop-example}
+mock_data <- data.frame(
+  pop = "cd4",
+  cd4 = c(2000, 2100, 1900, 2050),
+  ifng = c(500, 520, 480, 510)
+)
+
+# Calculate frequency (percentage)
+result <- calc_freq(
+  .data = mock_data,
+  den = "cd4",
+  num = "ifng"
+)
+result$freq
+```
+
+## Data Processing
+
+### Background Subtraction
+
+The `subtract_background()` function subtracts the unstimulated measurement from response columns:
+
+```{r subtract-bg-example}
+data_test <- data.frame(
+  pid = rep(c("a", "b"), each = 3),
+  stim = c("mtb", "ebv", "uns", "uns", "ebv", "mtb"),
+  resp1 = 1:6,
+  resp2 = c(34, 32, 30, 28, 26, 24)
+)
+
+data_out <- subtract_background(
+  .data = data_test,
+  grp = "pid",
+  stim = "stim",
+  uns = "uns",
+  resp = c("resp1", "resp2"),
+  remove_uns = FALSE
+)
+data_out
+```
+
+### Summing Over Markers
+
+The `sum_over_markers()` function aggregates proportions or frequencies over specified markers:
+
+```{r sum-markers-example}
+data("data_count")
+data_test <- data_count |>
+  calc_prop(
+    den = "count_pop_den",
+    num = "count_pop_num"
+  ) |>
+  dplyr::select(-c(count_pop_den, count_pop_num)) |>
+  dplyr::arrange(SubjectID, VisitType, stim, cyt_combn)
+
+data_out <- sum_over_markers(
+  .data = data_test,
+  grp = c("SubjectID", "VisitType", "stim"),
+  cmbn = "cyt_combn",
+  markers_to_sum = c("IFNg", "IL2", "IL17"),
+  levels = c("-", "+"),
+  resp = "prop"
+)
+head(data_out)
+```
+
+## Session Info
+
+```{r session-info}
+sessionInfo()
+```

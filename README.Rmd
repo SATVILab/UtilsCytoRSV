@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/SATVILab/UtilsCytoRSV/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/SATVILab/UtilsCytoRSV/actions/workflows/R-CMD-check.yml)
 [![Codecov test coverage](https://codecov.io/gh/SATVILab/UtilsCytoRSV/graph/badge.svg)](https://codecov.io/gh/SATVILab/UtilsCytoRSV)
+[![pkgdown](https://github.com/SATVILab/UtilsCytoRSV/actions/workflows/pkgdown.yml/badge.svg)](https://satvilab.github.io/UtilsCytoRSV/)
 <!-- badges: end -->
 
 `UtilsCytoRSV` is an R package that provides utility functions for working with cytometry data, including CyTOF (mass cytometry) and flow cytometry. The package offers tools for:

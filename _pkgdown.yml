@@ -1,0 +1,53 @@
+url: https://satvilab.github.io/UtilsCytoRSV/
+template:
+  bootstrap: 5
+
+navbar:
+  structure:
+    left:  [intro, reference, articles]
+    right: [search, github]
+  components:
+    github:
+      icon: fab fa-github
+      href: https://github.com/SATVILab/UtilsCytoRSV
+
+reference:
+- title: Visualization
+  desc: Functions for plotting cytometry data
+  contents:
+  - plot_cyto
+  - plot_cyto_grid
+
+- title: Channel and Marker Utilities
+  desc: Functions for working with channel and marker names from FCS files
+  contents:
+  - chnl_lab
+  - marker_lab
+  - chnl_to_marker
+  - marker_to_chnl
+  - get_chnl
+  - get_marker
+
+- title: Calculations
+  desc: Functions for calculating proportions and frequencies
+  contents:
+  - calc_freq
+  - calc_prop
+  - get_ecdf_list
+
+- title: Data Processing
+  desc: Functions for processing cytometry data
+  contents:
+  - subtract_background
+  - sum_over_markers
+
+- title: Data
+  desc: Example datasets included in the package
+  contents:
+  - data_count
+
+articles:
+- title: Getting Started
+  navbar: ~
+  contents:
+  - getting-started

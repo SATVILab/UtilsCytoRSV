@@ -20,7 +20,7 @@ Imports:
     dplyr,
     stringr,
     stats
-Suggests: 
+Suggests:
     UtilsCompassSV,
     here,
     remotes,
@@ -32,7 +32,11 @@ Suggests:
     usethis,
     DataTidyACSCyTOFCytokinesTCells,
     hexbin,
-    tibble
+    tibble,
+    knitr,
+    rmarkdown,
+    pkgdown
 RoxygenNote: 7.3.3
+VignetteBuilder: knitr
 Depends: 
     R (>= 4.1.0)
