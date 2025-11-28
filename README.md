@@ -6,8 +6,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/SATVILab/UtilsCytoRSV/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/SATVILab/UtilsCytoRSV/actions/workflows/R-CMD-check.yml)
-[![Codecov](https://codecov.io/gh/SATVILab/UtilsCytoRSV/branch/main/graph/badge.svg)](https://app.codecov.io/gh/SATVILab/UtilsCytoRSV?branch=main)
-
+[![Codecov test coverage](https://codecov.io/gh/SATVILab/UtilsCytoRSV/graph/badge.svg)](https://codecov.io/gh/SATVILab/UtilsCytoRSV)
+[![pkgdown](https://github.com/SATVILab/UtilsCytoRSV/actions/workflows/pkgdown.yml/badge.svg)](https://satvilab.github.io/UtilsCytoRSV/)
 <!-- badges: end -->
 
 `UtilsCytoRSV` is an R package that provides utility functions for
@@ -156,14 +156,14 @@ calc_freq(
 #> # A tibble: 10 × 4
 #>    pop     cd4  ifng  freq
 #>    <chr> <dbl> <dbl> <dbl>
-#>  1 cd4   2083.  477.  22.9
-#>  2 cd4   2013.  519.  25.8
-#>  3 cd4   1975.  492.  24.9
-#>  4 cd4   1971.  526.  26.7
-#>  5 cd4   2051.  501.  24.4
-#>  6 cd4   2021.  492.  24.3
-#>  7 cd4   2036.  495.  24.3
-#>  8 cd4   2030.  518.  25.5
-#>  9 cd4   2095.  463.  22.1
-#> 10 cd4   2016.  497.  24.7
+#>  1 cd4   2011.  498.  24.8
+#>  2 cd4   1974.  497.  25.2
+#>  3 cd4   1978.  500.  25.3
+#>  4 cd4   1960.  519.  26.5
+#>  5 cd4   2137.  528.  24.7
+#>  6 cd4   2096.  533.  25.4
+#>  7 cd4   1939.  518.  26.7
+#>  8 cd4   2064.  474.  22.9
+#>  9 cd4   1922.  497.  25.9
+#> 10 cd4   1957.  500.  25.5
 ```
